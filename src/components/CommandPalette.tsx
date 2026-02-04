@@ -1,6 +1,7 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useMemo } from 'react'
+import { useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useAppContext } from './AppContext'
 
@@ -16,13 +17,26 @@ const commands = [
 ]
 
 export default function CommandPalette() {
+  const router = useRouter()
   const { isCommandPaletteOpen, setCommandPaletteOpen } = useAppContext()
+
   const [query, setQuery] = useState('')
   const [selectedIndex, setSelectedIndex] = useState(0)
 
-  const filteredCommands = commands.filter((cmd) =>
-    cmd.name.toLowerCase().includes(query.toLowerCase()),
-  )
+  const filteredCommands = useMemo(() => {
+    const q = query.trim().toLowerCase()
+    if (!q) return commands
+    return commands.filter((cmd) => cmd.name.toLowerCase().includes(q))
+  }, [query])
+
+  // если фильтр сузился и индекс выходит за границы — поправить
+  useEffect(() => {
+    if (filteredCommands.length === 0) {
+      setSelectedIndex(0)
+      return
+    }
+    setSelectedIndex((prev) => Math.min(prev, filteredCommands.length - 1))
+  }, [filteredCommands.length])
 
   const close = useCallback(() => {
     setCommandPaletteOpen(false)
@@ -30,47 +44,64 @@ export default function CommandPalette() {
     setSelectedIndex(0)
   }, [setCommandPaletteOpen])
 
+  const open = useCallback(() => {
+    setCommandPaletteOpen(true)
+    setQuery('')
+    setSelectedIndex(0)
+  }, [setCommandPaletteOpen])
+
   const navigate = useCallback(
     (path: string) => {
-      window.location.hash = path
+      router.push(path) // правильная навигация Next.js (без /#/)
       close()
     },
-    [close],
+    [router, close],
   )
 
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-        e.preventDefault()
-        setCommandPaletteOpen(true)
-      }
-      if (e.key === 'Escape') close()
+    const onKeyDown = (e: KeyboardEvent) => {
+      const isK = e.key.toLowerCase() === 'k'
 
-      if (isCommandPaletteOpen) {
-        if (e.key === 'ArrowDown') {
-          e.preventDefault()
-          setSelectedIndex((prev) => (prev + 1) % filteredCommands.length)
-        }
-        if (e.key === 'ArrowUp') {
-          e.preventDefault()
-          setSelectedIndex((prev) => (prev - 1 + filteredCommands.length) % filteredCommands.length)
-        }
-        if (e.key === 'Enter' && filteredCommands[selectedIndex]) {
-          navigate(filteredCommands[selectedIndex].path)
-        }
+      // Cmd/Ctrl + K
+      if ((e.metaKey || e.ctrlKey) && isK) {
+        e.preventDefault()
+        if (isCommandPaletteOpen) close()
+        else open()
+        return
+      }
+
+      if (!isCommandPaletteOpen) return
+
+      if (e.key === 'Escape') {
+        e.preventDefault()
+        close()
+        return
+      }
+
+      if (!filteredCommands.length) return
+
+      if (e.key === 'ArrowDown') {
+        e.preventDefault()
+        setSelectedIndex((prev) => (prev + 1) % filteredCommands.length)
+        return
+      }
+
+      if (e.key === 'ArrowUp') {
+        e.preventDefault()
+        setSelectedIndex((prev) => (prev - 1 + filteredCommands.length) % filteredCommands.length)
+        return
+      }
+
+      if (e.key === 'Enter') {
+        e.preventDefault()
+        const cmd = filteredCommands[selectedIndex]
+        if (cmd) navigate(cmd.path)
       }
     }
 
-    window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [
-    isCommandPaletteOpen,
-    selectedIndex,
-    filteredCommands,
-    close,
-    navigate,
-    setCommandPaletteOpen,
-  ])
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [isCommandPaletteOpen, filteredCommands, selectedIndex, close, open, navigate])
 
   return (
     <AnimatePresence>
@@ -85,15 +116,18 @@ export default function CommandPalette() {
             className='absolute inset-0 bg-black/80 backdrop-blur-md cursor-zoom-out'
           />
 
-          {/* Modal Container */}
+          {/* Modal */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9, y: 10 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 10 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
             className='relative w-full max-w-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-[32px] shadow-[0_32px_64px_-16px_rgba(0,0,0,0.5)] z-[210] overflow-hidden'
+            role='dialog'
+            aria-modal='true'
+            aria-label='Командная палитра'
           >
-            {/* Input Section */}
+            {/* Input */}
             <div className='p-6 border-b border-zinc-100 dark:border-zinc-800 flex items-center gap-4'>
               <span className='text-xl text-zinc-400'>🔍</span>
               <input
@@ -114,46 +148,50 @@ export default function CommandPalette() {
               </button>
             </div>
 
-            {/* Results Section */}
+            {/* Results */}
             <div className='max-h-[50vh] overflow-y-auto p-3 custom-scrollbar'>
               {filteredCommands.length > 0 ? (
                 <div className='space-y-1'>
-                  {filteredCommands.map((cmd, idx) => (
-                    <button
-                      key={cmd.path}
-                      onClick={() => navigate(cmd.path)}
-                      onMouseEnter={() => setSelectedIndex(idx)}
-                      className={`w-full flex items-center justify-between p-4 rounded-[20px] transition-all group ${
-                        selectedIndex === idx
-                          ? 'bg-brand-500 text-white shadow-lg shadow-brand-500/20'
-                          : 'hover:bg-zinc-50 dark:hover:bg-zinc-800 text-zinc-600 dark:text-zinc-300'
-                      }`}
-                    >
-                      <div className='flex items-center gap-4'>
-                        <span
-                          className={`text-2xl transition-transform ${selectedIndex === idx ? 'scale-110' : ''}`}
-                        >
-                          {cmd.icon}
-                        </span>
-                        <div className='text-left'>
-                          <span className='font-bold uppercase tracking-tight text-sm block leading-none'>
-                            {cmd.name}
-                          </span>
+                  {filteredCommands.map((cmd, idx) => {
+                    const active = selectedIndex === idx
+                    return (
+                      <button
+                        key={cmd.path}
+                        onClick={() => navigate(cmd.path)}
+                        onMouseEnter={() => setSelectedIndex(idx)}
+                        className={`w-full flex items-center justify-between p-4 rounded-[20px] transition-all group ${
+                          active
+                            ? 'bg-brand-500 text-white shadow-lg shadow-brand-500/20'
+                            : 'hover:bg-zinc-50 dark:hover:bg-zinc-800 text-zinc-600 dark:text-zinc-300'
+                        }`}
+                      >
+                        <div className='flex items-center gap-4'>
                           <span
-                            className={`text-[9px] font-mono uppercase tracking-widest mt-1 block opacity-60`}
+                            className={`text-2xl transition-transform ${active ? 'scale-110' : ''}`}
                           >
-                            {cmd.path}
+                            {cmd.icon}
                           </span>
+                          <div className='text-left'>
+                            <span className='font-bold uppercase tracking-tight text-sm block leading-none'>
+                              {cmd.name}
+                            </span>
+                            <span className='text-[9px] font-mono uppercase tracking-widest mt-1 block opacity-60'>
+                              {cmd.path}
+                            </span>
+                          </div>
                         </div>
-                      </div>
-                      {selectedIndex === idx && (
-                        <div className='flex items-center gap-2'>
-                          <span className='text-[9px] font-mono font-bold opacity-60'>SELECT</span>
-                          <span className='text-xs'>↵</span>
-                        </div>
-                      )}
-                    </button>
-                  ))}
+
+                        {active && (
+                          <div className='flex items-center gap-2'>
+                            <span className='text-[9px] font-mono font-bold opacity-60'>
+                              SELECT
+                            </span>
+                            <span className='text-xs'>↵</span>
+                          </div>
+                        )}
+                      </button>
+                    )
+                  })}
                 </div>
               ) : (
                 <div className='p-16 text-center space-y-4'>
@@ -168,7 +206,7 @@ export default function CommandPalette() {
               )}
             </div>
 
-            {/* Footer / Hints */}
+            {/* Footer */}
             <div className='p-4 bg-zinc-50/50 dark:bg-black/20 border-t border-zinc-100 dark:border-zinc-800 flex justify-between items-center px-6'>
               <div className='flex gap-5 text-[9px] font-mono text-zinc-500 uppercase'>
                 <span className='flex items-center gap-1.5'>
@@ -184,6 +222,7 @@ export default function CommandPalette() {
                   Открыть
                 </span>
               </div>
+
               <span className='text-[9px] font-mono text-brand-500 font-bold uppercase tracking-[0.2em] animate-pulse'>
                 SET_PALETTE_READY
               </span>

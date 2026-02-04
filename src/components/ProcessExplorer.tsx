@@ -5,31 +5,31 @@ import { motion } from 'framer-motion'
 
 const steps = [
   {
-    title: 'Data Acquisition',
+    title: 'Сбор данных',
     desc: 'Сбор исходных данных, лазерное сканирование, аудит документации.',
     artifacts: ['Облако точек', 'Реестр несоответствий', 'BIM-исходник'],
     techLabel: 'SCAN_MODE: LASER_LIDAR',
   },
   {
-    title: 'Risk Modelling',
-    desc: 'Анализ критических путей, коллизий и потенциальных срывов бюджета.',
-    artifacts: ['Карта рисков', 'Матрица сценариев', 'LOD 300-400'],
+    title: 'Моделирование рисков',
+    desc: 'Анализ критических путей, коллизий и потенциальных отклонений бюджета.',
+    artifacts: ['Карта рисков', 'Матрица сценариев', 'LOD 300–400'],
     techLabel: 'ANALYSIS: STOCHASTIC_SIM',
   },
   {
-    title: 'Strategic Planning',
-    desc: 'Разработка детального графика 4D/5D и систем контроля.',
+    title: 'Стратегическое планирование',
+    desc: 'Разработка детального 4D/5D-графика и систем контроля.',
     artifacts: ['График Ганта', 'Ресурсная ведомость', 'План контроля'],
     techLabel: 'PLANNING: 4D_TEMPORAL',
   },
   {
-    title: 'Active Control',
+    title: 'Активный контроль',
     desc: 'Непрерывный мониторинг, авторский и строительный надзор.',
     artifacts: ['Ежедневный дашборд', 'Акты контроля', 'Фотограмметрия'],
     techLabel: 'CONTROL: REAL_TIME_FEED',
   },
   {
-    title: 'Reporting',
+    title: 'Отчетность',
     desc: 'Прозрачная отчетность и передача исполнительной документации.',
     artifacts: ['As-built модель', 'Финальный отчет', 'Электронный паспорт'],
     techLabel: 'OUTPUT: DIGITAL_CERT',

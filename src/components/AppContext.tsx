@@ -19,16 +19,19 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [reducedMotion, setReducedMotion] = useState(false)
   const [isCommandPaletteOpen, setCommandPaletteOpen] = useState(false)
 
+  // Инициализация с клиентской стороны
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme') as 'light' | 'dark'
-    if (savedTheme) setTheme(savedTheme)
+    const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null
+    if (savedTheme === 'light' || savedTheme === 'dark') {
+      setTheme(savedTheme)
+    }
 
     const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
     setReducedMotion(mq.matches)
   }, [])
 
+  // Только сохраняем тему, НЕ трогаем DOM
   useEffect(() => {
-    document.documentElement.classList.toggle('dark', theme === 'dark')
     localStorage.setItem('theme', theme)
   }, [theme])
 
@@ -54,6 +57,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
 export const useAppContext = () => {
   const context = useContext(AppContext)
-  if (!context) throw new Error('useAppContext must be used within AppProvider')
+  if (!context) {
+    throw new Error('useAppContext must be used within AppProvider')
+  }
   return context
 }

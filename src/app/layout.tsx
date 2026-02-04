@@ -1,38 +1,37 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+'use client'
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+import './globals.css'
+import React from 'react'
+import { AppProvider, useAppContext } from '../components/AppContext'
+import Header from '../components/Header'
+import Footer from '../components/Footer'
+import CommandPalette from '../components/CommandPalette'
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-export const metadata: Metadata = {
-  title: {
-    template: '%s СЭТ',
-    default: 'СЭТ — Digital Twin Control Room',
-  },
-  description:
-    'Технологическая студия управления строительством и энергетическими технологиями. ООО «СЭТ», ИНН 7720946228.',
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <AppProvider>
+      <LayoutContent>{children}</LayoutContent>
+    </AppProvider>
+  )
 }
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+function LayoutContent({ children }: { children: React.ReactNode }) {
+  const { techMode, theme } = useAppContext()
+
   return (
-    <html lang="en">
+    <html
+      className={theme === 'dark' ? 'dark' : ''}
+      suppressHydrationWarning
+    >
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`min-h-screen flex flex-col ${techMode ? 'tech-grid cursor-crosshair' : ''}`}
       >
-        {children}
+        {techMode && <div className='tech-scanline' />}
+        <Header />
+        <main className='grow container mx-auto px-4 py-8 relative z-10'>{children}</main>
+        <Footer />
+        <CommandPalette />
       </body>
     </html>
-  );
+  )
 }

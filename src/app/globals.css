@@ -1,26 +1,96 @@
-@import "tailwindcss";
+/* Tailwind v4 */
+@import 'tailwindcss';
+@custom-variant dark (&:where(.dark, .dark *));
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+  --color-brand-500: #14b8a6;
+  /* опционально */
+  --color-brand-400: #2dd4bf;
+  --color-brand-600: #0d9488;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  /* для эффекта свечения через text-shadow utilities (v4.1+) */
+  --text-shadow-glow: 0 0 15px rgb(20 184 166 / 0.4);
+} /* :contentReference[oaicite:0]{index=0} */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    color-scheme: light;
+  }
+  html.dark {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-white text-zinc-900 dark:bg-black dark:text-zinc-100 transition-colors duration-500 overflow-x-hidden;
+    font-family: var(--font-body);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* кастомные утилиты (рекомендуемый путь в v4) */
+@utility font-display {
+  font-family: var(--font-display);
 }
+
+@utility font-mono {
+  font-family: var(--font-mono);
+}
+
+/* Сетка мониторинга (Digital Twin) */
+@utility tech-grid {
+  background-size: 40px 40px;
+  background-image:
+    linear-gradient(to right, rgb(20 184 166 / 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(20 184 166 / 0.05) 1px, transparent 1px);
+}
+
+/* Сканирующая линия монитора */
+@utility tech-scanline {
+  @apply fixed inset-0 pointer-events-none z-[150];
+  height: 100px;
+  background: linear-gradient(
+    0deg,
+    rgb(0 0 0 / 0) 0%,
+    rgb(20 184 166 / 0.05) 50%,
+    rgb(0 0 0 / 0) 100%
+  );
+  animation: scan 8s linear infinite;
+}
+
+/* если нужно именно !important */
+@utility cursor-crosshair {
+  cursor: crosshair !important;
+}
+
+/* Кастомный скроллбар */
+@layer utilities {
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-zinc-200 dark:bg-zinc-800 rounded-full;
+  }
+}
+
+@keyframes scan {
+  0% {
+    transform: translateY(-100vh);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+/* Вариант 1: оставить как отдельную утилиту */
+@utility text-glow {
+  text-shadow: var(--text-shadow-glow);
+}
+
+/* Вариант 2 (если используешь встроенные utilities v4.1+):
+   просто применяй class="text-shadow-glow"
+   (появится благодаря --text-shadow-glow) */ /* :contentReference[oaicite:1]{index=1} */
