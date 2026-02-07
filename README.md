@@ -1,12 +1,12 @@
-# СЭТ — Digital Twin Control Room
+# СЭТ — ENGINEERING HUB
 
-![Next.js](https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js)
+![Next.js](https://img.shields.io/badge/Next.js-16-black?style=for-the-badge&logo=next.js)
 ![React](https://img.shields.io/badge/React-19-blue?style=for-the-badge&logo=react)
 ![Tailwind](https://img.shields.io/badge/Tailwind_CSS-v4-38B2AC?style=for-the-badge&logo=tailwind-css)
 ![Framer Motion](https://img.shields.io/badge/Framer_Motion-11-ff69b4?style=for-the-badge&logo=framer)
 
 ### Технологическая студия управления строительными рисками и энергетическими проектами.
-**ООО «СЭТ» (ИНН 7720946228)** — это синергия классического инженерного контроля и цифровых двойников (Digital Twins). Данный проект представляет собой корпоративный портал нового поколения, выполненный в эстетике **Control Room** (Центра управления).
+**ООО «СЭТ» (ИНН 7720946228)** — это классический инженерный хаб. Данный проект представляет собой корпоративный портал нового поколения, выполненный в эстетике **Control Room** (Центра управления).
 
 ---
 
@@ -47,32 +47,61 @@
 Проект следует современным стандартам организации директорий:
 
 ```
-📦src
- ┣ 📂app ——————————————————— # Маршрутизация и лейауты (Next.js App Router)
- ┃ ┣ 📂about
- ┃ ┃ ┗ 📜page.tsx
- ┃ ┣ 📂contacts
- ┃ ┃ ┗ 📜page.tsx
- ┃ ┣ 📂interactives
- ┃ ┃ ┗ 📜page.tsx
- ┃ ┣ 📂services
- ┃ ┃ ┗ 📜page.tsx
- ┃ ┣ 📜favicon.ico
- ┃ ┣ 📜globals.css
- ┃ ┣ 📜layout.tsx
+ 📦app
+ ┣ 📂about
  ┃ ┗ 📜page.tsx
- ┣ 📂components ———————————— # UI-компоненты
- ┃ ┣ 📜AppContext.tsx
- ┃ ┣ 📜Calculator.tsx
- ┃ ┣ 📜CommandPalette.tsx
- ┃ ┣ 📜Footer.tsx
- ┃ ┣ 📜Header.tsx
- ┃ ┣ 📜ProcessExplorer.tsx
- ┃ ┣ 📜RiskMap.tsx
- ┃ ┣ 📜Simulator.tsx
- ┃ ┗ 📜ThemeToggle.tsx
- ┗ 📂types ————————————————— # Строгая типизация TypeScript
-   ┗ 📜types.ts
+ ┣ 📂approach
+ ┃ ┗ 📜page.tsx
+ ┣ 📂contacts
+ ┃ ┗ 📜page.tsx
+ ┣ 📂interactives
+ ┃ ┗ 📜page.tsx
+ ┣ 📂privacy
+ ┃ ┗ 📜page.tsx
+ ┣ 📂services
+ ┃ ┗ 📜page.tsx
+ ┣ 📂terms
+ ┃ ┗ 📜page.tsx
+ ┣ 📜favicon.ico
+ ┣ 📜globals.css
+ ┣ 📜layout.tsx
+ ┗ 📜page.tsx
+
+ 📦components
+ ┣ 📂about
+ ┃ ┗ 📜AboutContent.tsx
+ ┣ 📂approach
+ ┃ ┗ 📜ApproachContent.tsx
+ ┣ 📂contacts
+ ┃ ┗ 📜ContactForm.tsx
+ ┣ 📂home
+ ┃ ┗ 📜HomeContent.tsx
+ ┣ 📂hooks
+ ┃ ┗ 📜useClientValue.ts
+ ┣ 📂interactives
+ ┃ ┗ 📜InteractivesContent.tsx
+ ┣ 📂privacy
+ ┃ ┗ 📜PrivacyContent.tsx
+ ┣ 📂services
+ ┃ ┗ 📜ServicesContent.tsx
+ ┣ 📂terms
+ ┃ ┗ 📜TermsContent.tsx
+ ┣ 📜AppContext.tsx
+ ┣ 📜Calculator.tsx
+ ┣ 📜CommandPalette.tsx
+ ┣ 📜Footer.tsx
+ ┣ 📜Header.tsx
+ ┣ 📜LayoutShell.tsx
+ ┣ 📜ProcessExplorer.tsx
+ ┣ 📜Providers.tsx
+ ┣ 📜RiskMap.tsx
+ ┣ 📜Simulator.tsx
+ ┗ 📜TypingText.tsx
+
+📦public
+ ┣ 📂fonts
+ ┣ 📂icons
+ ┣ 📂logo
  ```
 
 ## Быстрый старт
