@@ -145,7 +145,7 @@ export default function HomeContent() {
         <div className='flex flex-col justify-between gap-6 md:flex-row md:items-end'>
           <div className='space-y-3'>
             <h2 className='font-display text-4xl font-bold uppercase tracking-tighter'>
-              Наш Процесс
+              Наш Процесс:
             </h2>
             <p className='max-w-md text-zinc-500'>
               От сбора данных до формирования исполнительной документации.

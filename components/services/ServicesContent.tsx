@@ -231,7 +231,7 @@ export default function ServicesContent() {
             className='space-y-4'
           >
             <h1>
-              Наши <span className='text-zinc-300 dark:text-zinc-800'>Системные</span> <br />
+              Наши <span className='text-brand-500'>Системные</span> <br />
               Модули
             </h1>
           </motion.div>

@@ -36,104 +36,113 @@ const steps = [
   },
 ] as const
 
-type DataNode = {
-  id: string
-  x: number
-  y: number
-  duration: number
-  delay: number
-}
-
-function TechnicalVisualizer({ activeIndex }: { activeIndex: number }) {
-  const [nodes] = useState<DataNode[]>([])
-
+function TechnicalButton({
+  active,
+  index,
+  title,
+  techLabel,
+  onSelect,
+}: {
+  active: boolean
+  index: number
+  title: string
+  techLabel: string
+  onSelect: () => void
+}) {
   return (
-    <div className='relative w-full h-full overflow-hidden flex items-center justify-center'>
+    <button
+      type='button'
+      onClick={onSelect}
+      className={[
+        'relative shrink-0 snap-center rounded-2xl border transition-all text-left overflow-hidden',
+        'w-[80vw] sm:w-80 px-6 py-5',
+        active
+          ? 'bg-brand-500 border-brand-500 text-white shadow-lg shadow-brand-500/20 scale-[1.02]'
+          : 'bg-zinc-50 dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 text-zinc-500 hover:border-zinc-400 dark:hover:border-zinc-700',
+      ].join(' ')}
+      aria-pressed={active}
+    >
       {/* Background Grid */}
-      <div className='absolute inset-0 tech-grid opacity-20' />
+      <div className='absolute inset-0 tech-grid opacity-20 pointer-events-none' />
 
       {/* Moving Scanline */}
       <motion.div
-        animate={{ top: ['0%', '100%', '0%'] }}
+        aria-hidden
+        animate={{ top: ['-10%', '110%'] }}
         transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
-        className='absolute left-0 right-0 h-px bg-brand-500/30 z-10 shadow-[0_0_10px_rgba(20,184,166,0.5)]'
+        className={[
+          'absolute left-0 right-0 h-px z-10 pointer-events-none',
+          active
+            ? 'bg-white/35 shadow-[0_0_10px_rgba(255,255,255,0.35)]'
+            : 'bg-brand-500/30 shadow-[0_0_10px_rgba(20,184,166,0.35)]',
+        ].join(' ')}
       />
 
-      {/* Central Interactive Core */}
-      <div className='relative z-20 w-48 h-48'>
-        {/* Outer Rotating Ring */}
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-          className='absolute inset-0 border border-dashed border-brand-500/30 rounded-full'
-        />
-
-        {/* Inner Pulsing Core */}
-        <motion.div
-          animate={{ scale: [1, 1.05, 1], opacity: [0.3, 0.6, 0.3] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className='absolute inset-4 border-2 border-brand-500 rounded-2xl flex items-center justify-center'
-        >
-          <svg
-            className='w-16 h-16 text-brand-500'
-            viewBox='0 0 24 24'
-            fill='none'
-            stroke='currentColor'
-          >
-            <motion.path
-              key={activeIndex}
-              initial={{ pathLength: 0 }}
-              animate={{ pathLength: 1 }}
-              transition={{ duration: 1.5 }}
-              strokeLinecap='round'
-              strokeLinejoin='round'
-              strokeWidth={1}
-              d='M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z'
-            />
-          </svg>
-        </motion.div>
-
-        {/* Floating Data Nodes (без Math.random в render) */}
-        {nodes.map((n) => (
+      <div className='relative z-20 flex items-center gap-4'>
+        {/* Core (важно: shrink-0 чтобы не ужималось и не становилось овалом) */}
+        <div className='relative w-16 h-16 shrink-0'>
           <motion.div
-            key={n.id}
-            initial={{ opacity: 0 }}
-            animate={{
-              opacity: [0, 1, 0],
-              scale: [0.5, 1, 0.5],
-              x: `${n.x}%`,
-              y: `${n.y}%`,
-            }}
-            transition={{
-              duration: n.duration,
-              repeat: Infinity,
-              delay: n.delay,
-            }}
-            className='absolute w-1 h-1 bg-brand-500 rounded-full'
+            aria-hidden
+            animate={{ rotate: 360 }}
+            transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+            className={[
+              'absolute inset-0 border border-dashed rounded-full',
+              active ? 'border-white/40' : 'border-brand-500/30',
+            ].join(' ')}
           />
-        ))}
-      </div>
-
-      {/* Dynamic Data Labels */}
-      <div className='absolute top-6 left-6 font-mono text-[9px] text-zinc-500 space-y-1 z-30'>
-        <div className='flex items-center gap-2'>
-          <span className='w-1.5 h-1.5 bg-brand-500 rounded-full animate-pulse' />
-          <span className='text-zinc-300'>{steps[activeIndex].techLabel}</span>
+          <motion.div
+            aria-hidden
+            animate={{ scale: [1, 1.06, 1], opacity: [0.3, 0.6, 0.3] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className={[
+              'absolute inset-2 border-2 rounded-2xl flex items-center justify-center',
+              active ? 'border-white' : 'border-brand-500',
+            ].join(' ')}
+          >
+            <svg
+              className={['w-7 h-7', active ? 'text-white' : 'text-brand-500'].join(' ')}
+              viewBox='0 0 24 24'
+              fill='none'
+              stroke='currentColor'
+            >
+              <motion.path
+                key={index}
+                initial={{ pathLength: 0 }}
+                animate={{ pathLength: 1 }}
+                transition={{ duration: 1.2 }}
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth={1}
+                d='M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z'
+              />
+            </svg>
+          </motion.div>
         </div>
-        <div>LATENCY: 14ms</div>
-        <div className='text-brand-500/50'>ENCRYPTION: AES-256_ACTIVE</div>
+
+        {/* Labels */}
+        <div className='min-w-0'>
+          <div className='text-[10px] font-mono uppercase opacity-60'>Step {index + 1}</div>
+          <div className='font-bold font-display uppercase tracking-tight leading-snug'>
+            {title}
+          </div>
+          <div
+            className={[
+              'mt-1 text-[10px] font-mono truncate',
+              active ? 'text-white/80' : 'text-zinc-500',
+            ].join(' ')}
+          >
+            {techLabel}
+          </div>
+        </div>
       </div>
 
-      <div className='absolute bottom-6 right-6 font-mono text-[9px] text-zinc-500 text-right z-30'>
-        <div className='text-zinc-300'>NODE_ID: SET_CORE_0{activeIndex + 1}</div>
-        <div>COORD: 55.7558° N, 37.6173° E</div>
-        <div className='text-zinc-600'>STATUS: OPTIMIZING_FLOW</div>
-      </div>
-
-      {/* Visual Overlay */}
-      <svg className='absolute inset-0 w-full h-full pointer-events-none opacity-10'>
+      {/* Overlay grid */}
+      <svg
+        aria-hidden
+        className='absolute inset-0 w-full h-full pointer-events-none opacity-10'
+      >
         <pattern
-          id='grid-sub'
+          id={`grid-sub-${index}`}
           width='10'
           height='10'
           patternUnits='userSpaceOnUse'
@@ -148,10 +157,10 @@ function TechnicalVisualizer({ activeIndex }: { activeIndex: number }) {
         <rect
           width='100%'
           height='100%'
-          fill='url(#grid-sub)'
+          fill={`url(#grid-sub-${index})`}
         />
       </svg>
-    </div>
+    </button>
   )
 }
 
@@ -160,89 +169,54 @@ export default function ProcessExplorer() {
 
   return (
     <div className='relative'>
-      <div className='relative'>
-        <div className='relative flex gap-4 overflow-x-auto p-4 no-scrollbar snap-x snap-mandatory scroll-smooth px-[10vw] sm:px-2'>
-          {steps.map((step, i) => (
-            <button
-              key={step.title}
-              onClick={() => setActive(i)}
-              type='button'
-              className={`shrink-0 snap-center rounded-2xl border transition-all text-left
-          w-[80vw] sm:min-w-60 sm:w-auto px-6 py-4
-          ${
-            active === i
-              ? 'bg-brand-500 border-brand-500 text-white shadow-lg shadow-brand-500/20 scale-[1.02]'
-              : 'bg-zinc-50 dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 text-zinc-500 hover:border-zinc-400'
-          }`}
-            >
-              <div className='text-[10px] font-mono mb-1 uppercase opacity-60'>Step {i + 1}</div>
-              <h4 className='font-bold font-display uppercase tracking-tight'>{step.title}</h4>
-            </button>
-          ))}
-        </div>
+      {/* Выбор шага (вся анимация = кнопка) */}
+      <div className='flex gap-4 overflow-x-auto p-4 no-scrollbar snap-x snap-mandatory scroll-smooth px-[10vw] sm:px-2'>
+        {steps.map((s, i) => (
+          <TechnicalButton
+            key={s.title}
+            active={active === i}
+            index={i}
+            title={s.title}
+            techLabel={s.techLabel}
+            onSelect={() => setActive(i)}
+          />
+        ))}
       </div>
 
+      {/* Контент выбранного шага */}
       <motion.div
         key={active}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: 'easeOut' }}
-        className='mt-12 grid md:grid-cols-2 gap-8 lg:gap-12 items-center'
+        className='mt-10 grid md:grid-cols-2 gap-8 lg:gap-12 items-start'
       >
-        <div className='space-y-8 order-2 md:order-1'>
-          <div className='space-y-4'>
-            <h3 className='text-3xl font-display font-bold uppercase text-zinc-900 dark:text-zinc-100'>
-              {steps[active].title}
-            </h3>
-            <p className='text-xl text-zinc-500 dark:text-zinc-400 leading-relaxed'>
-              {steps[active].desc}
-            </p>
-          </div>
-
-          <div className='space-y-4'>
-            <h5 className='text-[10px] font-mono text-zinc-400 uppercase tracking-widest border-b border-zinc-200 dark:border-zinc-800 pb-2'>
-              Выходные артефакты
-            </h5>
-            <div className='flex flex-wrap gap-2'>
-              {steps[active].artifacts.map((art, j) => (
-                <motion.span
-                  key={`${steps[active].title}-${art}`}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: j * 0.1 }}
-                  className='px-4 py-2 bg-zinc-100 dark:bg-zinc-800 rounded-xl text-xs font-medium text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700 shadow-sm'
-                >
-                  {art}
-                </motion.span>
-              ))}
-            </div>
-          </div>
-
-          <div className='pt-4'>
-            <button
-              type='button'
-              className='flex items-center gap-3 text-brand-500 font-mono text-[10px] uppercase font-bold tracking-widest group'
-            >
-              Скачать регламент этапа
-              <svg
-                className='w-3 h-3 group-hover:translate-y-0.5 transition-transform'
-                fill='none'
-                viewBox='0 0 24 24'
-                stroke='currentColor'
-              >
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  strokeWidth={3}
-                  d='M19 14l-7 7m0 0l-7-7m7 7V3'
-                />
-              </svg>
-            </button>
-          </div>
+        <div className='space-y-4'>
+          <h3 className='text-3xl font-display font-bold uppercase text-zinc-900 dark:text-zinc-100'>
+            {steps[active].title}
+          </h3>
+          <p className='text-xl text-zinc-500 dark:text-zinc-400 leading-relaxed'>
+            {steps[active].desc}
+          </p>
         </div>
 
-        <div className='aspect-square bg-zinc-50 dark:bg-zinc-950 rounded-[40px] border border-zinc-200 dark:border-zinc-800 overflow-hidden relative shadow-inner order-1 md:order-2'>
-          <TechnicalVisualizer activeIndex={active} />
+        <div className='space-y-4'>
+          <h5 className='text-[10px] font-mono text-zinc-400 uppercase tracking-widest border-b border-zinc-200 dark:border-zinc-800 pb-2'>
+            Выходные артефакты
+          </h5>
+          <div className='flex flex-wrap gap-2'>
+            {steps[active].artifacts.map((art, j) => (
+              <motion.span
+                key={`${steps[active].title}-${art}`}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: j * 0.08 }}
+                className='px-4 py-2 bg-zinc-100 dark:bg-zinc-800 rounded-xl text-xs font-medium text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700 shadow-sm'
+              >
+                {art}
+              </motion.span>
+            ))}
+          </div>
         </div>
       </motion.div>
     </div>
