@@ -94,8 +94,8 @@ export default function Header() {
 
   return (
     <header
-      className={`sticky top-0 z-100 border-b border-zinc-50 dark:border-zinc-950 bg-white/50 dark:bg-black/50 backdrop-blur-2xl transition-all' ${
-        scrolled ? 'transition-all duration-150 border-none shadow-lg shadow-base-300/20' : ''
+      className={`sticky top-0 z-100 border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 backdrop-blur-2xl transition-all' ${
+        scrolled ? 'dark:bg-zinc-950/50 transition-all duration-150 border-none shadow-lg shadow-base-300/20' : ''
       }`}
     >
       <div className='container mx-auto px-4 h-20 flex items-center justify-between'>

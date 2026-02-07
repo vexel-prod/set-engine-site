@@ -31,7 +31,7 @@ export default function HomeContent() {
   return (
     <>
       {/* Header section */}
-      <section className='grid place-content-center relative overflow-hidden rounded-[40px] shadow-lg shadow-base-300/20 p-4 md:p-12 text-center border border-zinc-50 dark:border-zinc-800'>
+      <section className='grid place-content-center relative bg-zinc-50 dark:bg-zinc-950 overflow-hidden rounded-[40px] shadow-lg shadow-base-300/20 p-4 md:p-12 text-center border border-zinc-200 dark:border-zinc-800'>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

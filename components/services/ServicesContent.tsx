@@ -208,8 +208,8 @@ export default function ServicesContent() {
   return (
     <>
       {/* Header Section */}
-      <section className='relative overflow-hidden rounded-[40px] dark:bg-zinc-950 p-6 md:p-12 text-left border border-zinc-200 dark:border-zinc-900'>
-        <div className='absolute top-0 right-0 p-8 opacity-10'>
+      <section className='relative overflow-hidden rounded-[40px] bg-zinc-50 dark:bg-zinc-950 p-6 md:p-12 text-left border border-zinc-200 dark:border-zinc-800 shadow-lg shadow-base-300/20'>
+        <div className='absolute top-0 right-0 p-3 opacity-10'>
           <ServerCog
             size={240}
             className='text-brand-500 hidden md:block'
@@ -235,163 +235,165 @@ export default function ServicesContent() {
               Модули
             </h1>
           </motion.div>
+          <p className='text-xs md:text-xl text-zinc-500 max-w-2xl leading-relaxed border-t-4 border-dashed border-brand-500/50 w-max pt-4 mt-4'>
+            Мы предлагаем дискретные и комплексные инженерные решения, оцифрованные по стандарту
+            СЭТ. Каждый модуль гарантирует консистентность данных на протяжении всего жизненного
+            цикла объекта.
+          </p>
         </div>
-        <p className='text-xs md:text-xl text-zinc-500 max-w-2xl leading-relaxed'>
-          Мы предлагаем дискретные и комплексные инженерные решения, оцифрованные по стандарту СЭТ.
-          Каждый модуль гарантирует консистентность данных на протяжении всего жизненного цикла
-          объекта.
-        </p>
       </section>
 
-      {/* Services Grid */}
-      <LayoutGroup id='services-grid'>
-        <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3'>
-          {servicesData.map((s, i) => {
-            const isExpanded = expandedId === s.id
-            const Icon = s.icon
+      {/* Services Section */}
+      <section>
+        <LayoutGroup id='services-grid'>
+          <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3'>
+            {servicesData.map((s, i) => {
+              const isExpanded = expandedId === s.id
+              const Icon = s.icon
 
-            return (
-              <motion.article
-                key={s.id}
-                layout='position'
-                transition={{ layout: layoutTransition }}
-                style={{ willChange: 'transform' }}
-                initial={reduceMotion ? false : { opacity: 0, y: 14 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                animate={{ opacity: 1, y: 0 }}
-                className={`bg-white dark:bg-black hover:border-zinc-400 dark:hover:border-zinc-700 group relative flex flex-col rounded-[40px] border overflow-hidden ${
-                  isExpanded
-                    ? 'lg:col-span-2 border-brand-500 shadow-2xl shadow-brand-500/10'
-                    : ' border-zinc-200 dark:border-zinc-900 shadow-sm'
-                }`}
-              >
-                {/* Decorative Tech Elements */}
-                <div className='p-10 flex flex-col h-full'>
-                  <div className='flex justify-between items-start mb-8'>
-                    <div
-                      className={`p-4 rounded-2xl ${
-                        isExpanded
-                          ? 'bg-brand-500 text-white'
-                          : 'bg-zinc-100 dark:bg-zinc-900 text-brand-500'
-                      }`}
-                    >
-                      <Icon size={30} />
-                    </div>
-
-                    <div className='text-right'>
-                      <div className='font-mono text-[10px] text-zinc-400 uppercase tracking-widest'>
-                        {s.id}
-                      </div>
-                      <div className='flex items-center justify-end gap-2 mt-1'>
-                        <div
-                          className={`w-1.5 h-1.5 rounded-full ${
-                            isExpanded ? 'bg-emerald-400 animate-pulse' : 'bg-brand-500/30'
-                          }`}
-                        />
-                        <span className='font-mono text-[8px] text-zinc-500 uppercase'>
-                          Status: Ready
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className='space-y-4 grow'>
-                    <h3 className='font-display text-2xl font-bold uppercase tracking-tight group-hover:text-brand-500 transition-colors'>
-                      {s.title}
-                    </h3>
-                    <p
-                      className={`text-sm leading-relaxed ${isExpanded ? 'text-zinc-400' : 'text-zinc-500'}`}
-                    >
-                      {s.desc}
-                    </p>
-                  </div>
-
-                  {/* Expanded content */}
-                  <AnimatePresence
-                    initial={false}
-                    mode='sync'
-                  >
-                    {isExpanded && (
-                      <motion.div
-                        key='expand'
-                        layout
-                        transition={{ layout: layoutTransition }}
-                        initial={reduceMotion ? false : { opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={reduceMotion ? { opacity: 0, height: 0 } : { opacity: 0, height: 0 }}
-                        className='mt-12 pt-12 border-t border-zinc-800'
+              return (
+                <motion.article
+                  key={s.id}
+                  layout='position'
+                  transition={{ layout: layoutTransition }}
+                  style={{ willChange: 'transform' }}
+                  initial={reduceMotion ? false : { opacity: 0, y: 14 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className={`bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 hover:border-brand-500 group relative flex flex-col rounded-[40px]  overflow-hidden ${
+                    isExpanded ? 'lg:col-span-2 border-brand-500' : 'shadow-lg shadow-base-300/20'
+                  }`}
+                >
+                  {/* Decorative Tech Elements */}
+                  <div className='p-10 flex flex-col h-full'>
+                    <div className='flex justify-between items-start mb-8'>
+                      <div
+                        className={`p-4 rounded-2xl ${
+                          isExpanded
+                            ? 'bg-brand-500 text-white'
+                            : 'bg-zinc-100 dark:bg-zinc-900 text-brand-500'
+                        }`}
                       >
-                        <div className='grid md:grid-cols-2 gap-12'>
-                          <div className='space-y-6'>
-                            <h4 className='text-[10px] font-mono text-zinc-500 uppercase tracking-widest flex items-center gap-2'>
-                              <Settings size={12} /> СОСТАВ МОДУЛЯ:
-                            </h4>
-                            <ul className='grid gap-3 list-inside'>
-                              {s.scope.map((item, idx) => (
-                                <li
-                                  key={idx}
-                                  className='text-xs font-medium'
-                                >
-                                  <div className='flex gap-2 items-center'>
-                                    <div className='w-2 h-2 bg-brand-500 rounded-full shrink-0' />
-                                    <span>{item}</span>
-                                  </div>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
+                        <Icon size={30} />
+                      </div>
 
-                          <div className='space-y-6'>
-                            <h4 className='text-[10px] font-mono text-zinc-500 uppercase tracking-widest flex items-center gap-2'>
-                              <Cpu size={12} /> ШАГИ:
-                            </h4>
-                            <div className='grid gap-4'>
-                              <ul className='grid gap-3 list-decimal list-inside'>
-                                {s.process.map((item, idx) => (
+                      <div className='text-right'>
+                        <div className='font-mono text-[10px] text-zinc-400 uppercase tracking-widest'>
+                          {s.id}
+                        </div>
+                        <div className='flex items-center justify-end gap-2 mt-1'>
+                          <div
+                            className={`w-1.5 h-1.5 rounded-full ${
+                              isExpanded ? 'bg-emerald-400 animate-pulse' : 'bg-brand-500/30'
+                            }`}
+                          />
+                          <span className='font-mono text-[8px] text-zinc-500 uppercase'>
+                            Status: Ready
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className='space-y-4 grow'>
+                      <h3 className='font-display text-2xl font-bold uppercase tracking-tight group-hover:text-brand-500 transition-colors'>
+                        {s.title}
+                      </h3>
+                      <p
+                        className={`text-sm leading-relaxed ${isExpanded ? 'text-zinc-400' : 'text-zinc-500'}`}
+                      >
+                        {s.desc}
+                      </p>
+                    </div>
+
+                    {/* Expanded content */}
+                    <AnimatePresence
+                      initial={false}
+                      mode='sync'
+                    >
+                      {isExpanded && (
+                        <motion.div
+                          key='expand'
+                          layout
+                          transition={{ layout: layoutTransition }}
+                          initial={reduceMotion ? false : { opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: 'auto' }}
+                          exit={
+                            reduceMotion ? { opacity: 0, height: 0 } : { opacity: 0, height: 0 }
+                          }
+                          className='mt-12 pt-12 border-t border-zinc-800'
+                        >
+                          <div className='grid md:grid-cols-2 gap-12'>
+                            <div className='space-y-6'>
+                              <h4 className='text-[10px] font-mono text-zinc-500 uppercase tracking-widest flex items-center gap-2'>
+                                <Settings size={12} /> СОСТАВ МОДУЛЯ:
+                              </h4>
+                              <ul className='grid gap-3 list-inside'>
+                                {s.scope.map((item, idx) => (
                                   <li
                                     key={idx}
-                                    className='flex items-center gap-2 text-xs font-medium'
+                                    className='text-xs font-medium'
                                   >
-                                    <div className='text-brand-500 text-xs'>{idx + 1 + '.'}</div>
-                                    <span>{item}</span>
+                                    <div className='flex gap-2 items-center'>
+                                      <div className='w-2 h-2 bg-brand-500 rounded-full shrink-0' />
+                                      <span>{item}</span>
+                                    </div>
                                   </li>
                                 ))}
                               </ul>
                             </div>
-                          </div>
-                        </div>
-                        <div className='flex w-full mt-12 gap-2 items-center justify-center p-2 rounded-xl  border border-zinc-500/50'>
-                          <span className='text-xs font-mono text-brand-500 uppercase'>
-                            Длительность модуля:
-                          </span>
-                          <span className='text-xs font-bold'>{s.duration}</span>
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
 
-                  <div className='mt-12 flex items-center gap-4'>
-                    <button
-                      onClick={() => setExpandedId(isExpanded ? null : s.id)}
-                      className={`cursor-pointer grow py-4 rounded-2xl font-mono text-[10px] font-bold uppercase tracking-[0.2em] border transition-colors duration-300 ${
-                        isExpanded
-                          ? 'bg-brand-500 border-brand-500 text-white shadow-lg shadow-brand-500/20'
-                          : 'bg-transparent border-zinc-200 dark:border-zinc-800 text-zinc-500 hover:border-brand-500 hover:text-brand-500'
-                      }`}
-                    >
-                      {isExpanded ? 'ЗАКРЫТЬ_МОДУЛЬ' : 'ИЗУЧИТЬ_МОДУЛЬ'}
-                    </button>
+                            <div className='space-y-6'>
+                              <h4 className='text-[10px] font-mono text-zinc-500 uppercase tracking-widest flex items-center gap-2'>
+                                <Cpu size={12} /> ШАГИ:
+                              </h4>
+                              <div className='grid gap-4'>
+                                <ul className='grid gap-3 list-decimal list-inside'>
+                                  {s.process.map((item, idx) => (
+                                    <li
+                                      key={idx}
+                                      className='flex items-center gap-2 text-xs font-medium'
+                                    >
+                                      <div className='text-brand-500 text-xs'>{idx + 1 + '.'}</div>
+                                      <span>{item}</span>
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                          <div className='flex w-full mt-12 gap-2 items-center justify-center p-2 rounded-xl  border border-zinc-500/50'>
+                            <span className='text-xs font-mono text-brand-500 uppercase'>
+                              Длительность модуля:
+                            </span>
+                            <span className='text-xs font-bold'>{s.duration}</span>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+
+                    <div className='mt-12 flex items-center gap-4'>
+                      <button
+                        onClick={() => setExpandedId(isExpanded ? null : s.id)}
+                        className={`cursor-pointer grow py-4 rounded-2xl font-mono text-[10px] font-bold uppercase tracking-[0.2em] border transition-colors duration-300 ${
+                          isExpanded
+                            ? 'bg-brand-500 border-brand-500 text-white shadow-lg shadow-brand-500/20'
+                            : 'bg-transparent border-zinc-200 dark:border-zinc-800 text-zinc-500 hover:border-brand-500 hover:text-brand-500'
+                        }`}
+                      >
+                        {isExpanded ? 'ЗАКРЫТЬ_МОДУЛЬ' : 'ИЗУЧИТЬ_МОДУЛЬ'}
+                      </button>
+                    </div>
                   </div>
-                </div>
-              </motion.article>
-            )
-          })}
-        </div>
-      </LayoutGroup>
+                </motion.article>
+              )
+            })}
+          </div>
+        </LayoutGroup>
+      </section>
 
       {/* Performance Footer Banner */}
-      <section className='relative overflow-hidden rounded-[40px] dark:bg-zinc-950 p-12 text-left border border-zinc-200 dark:border-zinc-900'>
+      <section className='relative overflow-hidden rounded-[40px] bg-zinc-50 dark:bg-zinc-950 p-12 text-left border border-zinc-200 dark:border-zinc-800 shadow-lg shadow-base-300/20'>
         <div className='absolute inset-0 opacity-10 tech-grid' />
         <div className='relative z-10 flex flex-col md:flex-row justify-between items-center gap-8 text-center md:text-left'>
           <div className='space-y-4'>

@@ -109,20 +109,20 @@ function InteractivesContentInner() {
   return (
     <>
       {/* Simulation Hub Header */}
-      <section className='relative overflow-hidden rounded-[40px] dark:bg-zinc-950 p-12 text-left border border-zinc-200 dark:border-zinc-900'>
-        <div className='absolute top-0 right-0 p-8 opacity-10'>
+      <section className='relative overflow-hidden rounded-[40px] bg-zinc-50 p-6 md:p-12 text-left dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800'>
+        <div className='absolute top-0 right-0 opacity-10'>
           <SquareTerminal
-            size={240}
-            className='text-brand-500'
+            size={267}
+            className='text-brand-500 hidden md:block'
           />
         </div>
-        <div className='border-l-4 border-brand-500 pl-8 md:pl-12'>
+        <div className='border-l-2 md:border-l-4 border-brand-500 pl-2 md:pl-12'>
           <div className='flex items-center gap-3 font-mono text-[10px] font-bold uppercase tracking-[0.4em] text-brand-500'>
             <SquareTerminal
               size={14}
               className='animate-pulse'
             />
-            system_simulation_environment
+            system_simulation
           </div>
           <motion.div
             initial={reduceMotion ? false : { opacity: 0, x: -24 }}
@@ -132,10 +132,10 @@ function InteractivesContentInner() {
             className='space-y-4'
           >
             <h1>
-              интерактивный <br /> <span className='text-zinc-300 dark:text-zinc-800'>центр</span>
+              эмулятор <br /> <span className='text-brand-500'>процессов</span>
             </h1>
           </motion.div>
-          <p>
+          <p className='text-xs md:text-xl text-zinc-500 max-w-2xl leading-relaxed'>
             Развертывание виртуальных сценариев управления. Выберите модуль для проведения
             технического или финансового анализа.
           </p>
@@ -223,7 +223,7 @@ function InteractivesContentInner() {
 
           {/* Main Simulation Display */}
           <div className='lg:col-span-3'>
-            <div className='relative h-full rounded-[48px] bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 overflow-hidden min-h-150 shadow-inner flex flex-col'>
+            <div className='relative h-full rounded-[48px] bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 overflow-hidden min-h-150 shadow-inner flex flex-col'>
               {/* Bezel UI */}
               <div className='absolute top-0 left-0 right-0 h-10 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between px-8 bg-zinc-100/50 dark:bg-zinc-900/50'>
                 <div className='flex gap-4 items-center'>

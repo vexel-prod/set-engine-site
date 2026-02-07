@@ -58,7 +58,7 @@ const Simulator: React.FC = () => {
   if (finished) {
     const maturity = getMaturity();
     return (
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="p-8 bg-zinc-900 border border-zinc-800 rounded-3xl">
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="p-8 border border-zinc-800 rounded-3xl">
         <h3 className="text-2xl font-bold mb-4 font-display">Результат аудита</h3>
         <div className="mb-6">
           <span className="text-zinc-400 text-sm block mb-1">Уровень цифровой зрелости:</span>
@@ -113,10 +113,10 @@ const Simulator: React.FC = () => {
               <button
                 key={i}
                 onClick={() => handleAnswer(opt.points, opt.recommendation)}
-                className="p-5 text-left bg-zinc-900/50 border border-zinc-800 rounded-2xl hover:border-brand-500 hover:bg-brand-500/5 transition-all group"
+                className="p-5 text-left cursor-pointer dark:bg-black/50 border border-zinc-800 rounded-2xl hover:border-brand-500 hover:bg-brand-500/5 transition-all group"
               >
                 <div className="flex items-center justify-between">
-                  <span className="font-medium text-zinc-200 group-hover:text-brand-500">{opt.label}</span>
+                  <span className="font-medium group-hover:text-brand-500">{opt.label}</span>
                   <div className="w-6 h-6 rounded-full border border-zinc-700 flex items-center justify-center group-hover:border-brand-500">
                     <div className="w-2 h-2 bg-brand-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
                   </div>
