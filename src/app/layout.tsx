@@ -1,37 +1,28 @@
-'use client'
 
-import './globals.css'
-import React from 'react'
-import { AppProvider, useAppContext } from '../components/AppContext'
-import Header from '../components/Header'
-import Footer from '../components/Footer'
-import CommandPalette from '../components/CommandPalette'
+import React from "react";
+import Providers from "../components/Providers";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import CommandPalette from "../components/CommandPalette";
+import LayoutShell from "../components/LayoutShell";
+import "./globals.css";
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+// Making children optional to fix TS errors in some environments when passing components
+export default function RootLayout({
+  children,
+}: {
+  children?: React.ReactNode;
+}) {
   return (
-    <AppProvider>
-      <LayoutContent>{children}</LayoutContent>
-    </AppProvider>
-  )
-}
-
-function LayoutContent({ children }: { children: React.ReactNode }) {
-  const { techMode, theme } = useAppContext()
-
-  return (
-    <html
-      className={theme === 'dark' ? 'dark' : ''}
-      suppressHydrationWarning
-    >
-      <body
-        className={`min-h-screen flex flex-col ${techMode ? 'tech-grid cursor-crosshair' : ''}`}
-      >
-        {techMode && <div className='tech-scanline' />}
+    <Providers>
+      <LayoutShell>
         <Header />
-        <main className='grow container mx-auto px-4 py-8 relative z-10'>{children}</main>
+        <main className="container relative z-10 mx-auto flex-grow px-4 py-12">
+          {children}
+        </main>
         <Footer />
         <CommandPalette />
-      </body>
-    </html>
-  )
+      </LayoutShell>
+    </Providers>
+  );
 }

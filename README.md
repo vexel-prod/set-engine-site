@@ -1,36 +1,102 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# СЭТ — Digital Twin Control Room
 
-## Getting Started
+![Next.js](https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js)
+![React](https://img.shields.io/badge/React-19-blue?style=for-the-badge&logo=react)
+![Tailwind](https://img.shields.io/badge/Tailwind_CSS-v4-38B2AC?style=for-the-badge&logo=tailwind-css)
+![Framer Motion](https://img.shields.io/badge/Framer_Motion-11-ff69b4?style=for-the-badge&logo=framer)
 
-First, run the development server:
+### Технологическая студия управления строительными рисками и энергетическими проектами.
+**ООО «СЭТ» (ИНН 7720946228)** — это синергия классического инженерного контроля и цифровых двойников (Digital Twins). Данный проект представляет собой корпоративный портал нового поколения, выполненный в эстетике **Control Room** (Центра управления).
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## Ключевые концепции дизайна
+
+Проект разработан на стыке промышленного дизайна и высокопроизводительных интерфейсов:
+
+-   **Digital Twin Aesthetic**: Интерфейс имитирует рабочее пространство инженера-координатора.
+-   **Tech Mode**: Режим глубокого погружения с динамической сеткой (tech-grid) и сканирующими линиями (scanlines).
+-   **Command Palette (⌘+K)**: Быстрая навигация по системе через централизованный поисковый узел.
+-   **LOD 400 Standards**: Визуализация процессов ориентирована на стандарты высокой детализации BIM-моделей.
+
+---
+
+## Технологический стек
+
+-   **Framework**: [Next.js 16](https://nextjs.org/) (App Router) — максимальная производительность и SEO.
+-   **Library**: [React 19](https://react.dev/) — использование новейших хуков и серверных компонентов.
+-   **Styling**: [Tailwind CSS v4](https://tailwindcss.com/) — конфигурация через CSS-переменные и `@theme`.
+-   **Animations**: [Framer Motion](https://www.framer.com/motion/) — "физические" переходы и интерактивные состояния.
+-   **Icons**: [Lucide React](https://lucide.dev/) — чистая векторная графика.
+
+---
+
+## Интерактивные модули
+
+В приложении реализованы уникальные инструменты для взаимодействия с клиентом:
+
+1.  **Project Simulator**: Опросник для определения «цифровой зрелости» строительного объекта.
+2.  **Budget Calculator**: Калькулятор для оценки стоимости инженерного контроля на основе площади и сложности.
+3.  **Risk Map**: Визуальная матрица классификации рисков (P1, P2, P3) в энергетических проектах.
+4.  **Process Explorer**: Анимированный таймлайн жизненного цикла объекта (от изысканий до As-built модели).
+
+---
+
+## Архитектура проекта
+
+Проект следует современным стандартам организации директорий:
+
+```
+📦src
+ ┣ 📂app ——————————————————— # Маршрутизация и лейауты (Next.js App Router)
+ ┃ ┣ 📂about
+ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┣ 📂contacts
+ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┣ 📂interactives
+ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┣ 📂services
+ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┣ 📜favicon.ico
+ ┃ ┣ 📜globals.css
+ ┃ ┣ 📜layout.tsx
+ ┃ ┗ 📜page.tsx
+ ┣ 📂components ———————————— # UI-компоненты
+ ┃ ┣ 📜AppContext.tsx
+ ┃ ┣ 📜Calculator.tsx
+ ┃ ┣ 📜CommandPalette.tsx
+ ┃ ┣ 📜Footer.tsx
+ ┃ ┣ 📜Header.tsx
+ ┃ ┣ 📜ProcessExplorer.tsx
+ ┃ ┣ 📜RiskMap.tsx
+ ┃ ┣ 📜Simulator.tsx
+ ┃ ┗ 📜ThemeToggle.tsx
+ ┗ 📂types ————————————————— # Строгая типизация TypeScript
+   ┗ 📜types.ts
+ ```
+
+## Быстрый старт
+
+1. Установка зависимостей
+
+```
+bun install
+# или
+yarn install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Запуск в режиме разработки
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+`npm run dev`
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. Сборка для Production
 
-## Learn More
+```
+npm run build
+npm start
+```
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Юридическая информация
+Проект был разработан по заказу и содержит официальные данные организации для обеспечения максимальной прозрачности:
+ОГРН: 1257700108852
+ИНН: 7720946228
