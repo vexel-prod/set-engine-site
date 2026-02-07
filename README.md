@@ -47,32 +47,61 @@
 Проект следует современным стандартам организации директорий:
 
 ```
-📦src
- ┣ 📂app ——————————————————— # Маршрутизация и лейауты (Next.js App Router)
- ┃ ┣ 📂about
- ┃ ┃ ┗ 📜page.tsx
- ┃ ┣ 📂contacts
- ┃ ┃ ┗ 📜page.tsx
- ┃ ┣ 📂interactives
- ┃ ┃ ┗ 📜page.tsx
- ┃ ┣ 📂services
- ┃ ┃ ┗ 📜page.tsx
- ┃ ┣ 📜favicon.ico
- ┃ ┣ 📜globals.css
- ┃ ┣ 📜layout.tsx
+📦app
+ ┣ 📂about
  ┃ ┗ 📜page.tsx
- ┣ 📂components ———————————— # UI-компоненты
- ┃ ┣ 📜AppContext.tsx
- ┃ ┣ 📜Calculator.tsx
- ┃ ┣ 📜CommandPalette.tsx
- ┃ ┣ 📜Footer.tsx
- ┃ ┣ 📜Header.tsx
- ┃ ┣ 📜ProcessExplorer.tsx
- ┃ ┣ 📜RiskMap.tsx
- ┃ ┣ 📜Simulator.tsx
- ┃ ┗ 📜ThemeToggle.tsx
- ┗ 📂types ————————————————— # Строгая типизация TypeScript
-   ┗ 📜types.ts
+ ┣ 📂approach
+ ┃ ┗ 📜page.tsx
+ ┣ 📂contacts
+ ┃ ┗ 📜page.tsx
+ ┣ 📂interactives
+ ┃ ┗ 📜page.tsx
+ ┣ 📂privacy
+ ┃ ┗ 📜page.tsx
+ ┣ 📂services
+ ┃ ┗ 📜page.tsx
+ ┣ 📂terms
+ ┃ ┗ 📜page.tsx
+ ┣ 📜favicon.ico
+ ┣ 📜globals.css
+ ┣ 📜layout.tsx
+ ┗ 📜page.tsx
+
+ 📦components
+ ┣ 📂about
+ ┃ ┗ 📜AboutContent.tsx
+ ┣ 📂approach
+ ┃ ┗ 📜ApproachContent.tsx
+ ┣ 📂contacts
+ ┃ ┗ 📜ContactForm.tsx
+ ┣ 📂home
+ ┃ ┗ 📜HomeContent.tsx
+ ┣ 📂hooks
+ ┃ ┗ 📜useClientValue.ts
+ ┣ 📂interactives
+ ┃ ┗ 📜InteractivesContent.tsx
+ ┣ 📂privacy
+ ┃ ┗ 📜PrivacyContent.tsx
+ ┣ 📂services
+ ┃ ┗ 📜ServicesContent.tsx
+ ┣ 📂terms
+ ┃ ┗ 📜TermsContent.tsx
+ ┣ 📜AppContext.tsx
+ ┣ 📜Calculator.tsx
+ ┣ 📜CommandPalette.tsx
+ ┣ 📜Footer.tsx
+ ┣ 📜Header.tsx
+ ┣ 📜LayoutShell.tsx
+ ┣ 📜ProcessExplorer.tsx
+ ┣ 📜Providers.tsx
+ ┣ 📜RiskMap.tsx
+ ┣ 📜Simulator.tsx
+ ┗ 📜TypingText.tsx
+
+📦public
+ ┣ 📂fonts
+ ┣ 📂icons
+ ┣ 📂logo
  ```
 
 ## Быстрый старт
