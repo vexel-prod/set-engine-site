@@ -1,10 +1,10 @@
+import CommandPalette from '@/components/CommandPalette'
+import Footer from '@/components/Footer'
+import Header from '@/components/Header'
+import LayoutShell from '@/components/LayoutShell'
+import Providers from '@/components/Providers'
 import type { Metadata } from 'next'
 import React from 'react'
-import Providers from '@/components/Providers'
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
-import CommandPalette from '@/components/CommandPalette'
-import LayoutShell from '@/components/LayoutShell'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -26,7 +26,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Providers>
           <LayoutShell>
             <Header />
-            <main className='flex flex-col gap-6 container relative z-10 mx-auto grow p-6'>{children}</main>
+            <main className='flex flex-col gap-6 container relative z-10 mx-auto grow p-6'>
+              {children}
+            </main>
             <Footer />
             <CommandPalette />
           </LayoutShell>

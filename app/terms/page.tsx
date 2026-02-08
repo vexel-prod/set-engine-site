@@ -1,5 +1,5 @@
-import TermsContent from '../../components/terms/TermsContent'
 import { Metadata } from 'next'
+import TermsContent from '@/components/terms/TermsContent'
 
 export const metadata: Metadata = {
   title: 'Политика обработки данных',

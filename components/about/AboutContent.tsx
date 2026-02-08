@@ -16,7 +16,7 @@ import {
 } from 'lucide-react'
 import Image from 'next/image'
 import { useMemo } from 'react'
-import { companyData } from '../../data/company'
+import { companyData } from '@/data/company'
 
 type StatItem = {
   label: string

@@ -249,7 +249,7 @@ export default function ServicesContent() {
       <section>
         <LayoutGroup id='services-grid'>
           <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3'>
-            {servicesData.map((s, i) => {
+            {servicesData.map((s) => {
               const isExpanded = expandedId === s.id
               const Icon = s.icon
 
