@@ -1,8 +1,8 @@
 'use client'
 
-import React, { useMemo, useState } from 'react'
+import { Document, Font, Page, StyleSheet, Text, View } from '@react-pdf/renderer'
 import dynamic from 'next/dynamic'
-import { Document, Page, Text, View, StyleSheet, Font } from '@react-pdf/renderer'
+import React, { useMemo, useState } from 'react'
 
 const PDFDownloadLink = dynamic(
   () => import('@react-pdf/renderer').then((m) => m.PDFDownloadLink),
@@ -617,7 +617,6 @@ const Calculator: React.FC = () => {
 
   return (
     <div className='w-full max-w-6xl mx-auto'>
-      {/* Критично для мобилки: w-full + адекватные паддинги + никаких фиксированных min-width/nowrap */}
       <div className='grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-start p-4 sm:p-6 lg:p-8 rounded-3xl w-full'>
         {/* LEFT */}
         <div className='space-y-6 min-w-0'>
@@ -688,7 +687,7 @@ const Calculator: React.FC = () => {
                   className={`cursor-pointer p-3 rounded-xl border text-sm font-medium transition-all w-full ${
                     form.region === r
                       ? 'bg-brand-500 border-brand-500 text-white'
-                      : 'border-zinc-500 hover:border-zinc-600'
+                      : 'border-zinc-200 hover:border-zinc-600'
                   }`}
                 >
                   {human.region(r)}
@@ -710,7 +709,7 @@ const Calculator: React.FC = () => {
                   className={`cursor-pointer p-3 rounded-xl border text-sm font-medium transition-all w-full ${
                     form.urgency === u
                       ? 'bg-brand-500 border-brand-500 text-white'
-                      : 'border-zinc-500 hover:border-zinc-600'
+                      : 'border-zinc-200 hover:border-zinc-600'
                   }`}
                 >
                   {human.urgency(u)}
@@ -740,7 +739,7 @@ const Calculator: React.FC = () => {
                     onClick={() => toggleService(s.key)}
                     className={`w-full text-left p-4 rounded-2xl border transition-all min-w-0 ${
                       disabled
-                        ? 'opacity-40 cursor-not-allowed border-zinc-900 bg-black/20'
+                        ? 'opacity-40 cursor-not-allowed border-zinc-800 bg-black/20'
                         : checked
                           ? 'border-brand-500/70 bg-brand-500/10'
                           : 'border-zinc-800 hover:border-zinc-600'
@@ -772,7 +771,7 @@ const Calculator: React.FC = () => {
 
         {/* RIGHT */}
         <div className='min-w-0'>
-          <div className='p-4 sm:p-6 lg:p-8 rounded-2xl border border-brand-500/20 flex flex-col justify-center w-full'>
+          <div className='p-4 sm:p-6 lg:p-8 rounded-3xl border border-zinc-200 dark:border-zinc-800 flex flex-col justify-center w-full shadow-lg shadow-base-300/20'>
             <div className='text-center space-y-6 sm:space-y-8 min-w-0'>
               <div className='min-w-0'>
                 <span className='text-xs sm:text-sm font-mono uppercase tracking-widest block mb-3 sm:mb-4'>
@@ -840,22 +839,19 @@ const Calculator: React.FC = () => {
                 <PDFDownloadLink
                   document={pdfDoc}
                   fileName={`${filename}.pdf`}
-                  className='cursor-pointer w-full py-4 bg-brand-500 text-white font-bold rounded-xl hover:bg-brand-400 transition-all flex items-center justify-center'
+                  className='cursor-pointer w-full py-4 bg-brand-500 text-white font-bold rounded-xl hover:bg-brand-400 transition-all flex items-center justify-center hover:shadow-lg shadow-base-300/20'
                 >
                   {({ loading }) => (loading ? 'Готовим PDF…' : 'Скачать PDF')}
                 </PDFDownloadLink>
               </div>
             </div>
           </div>
-            <div className='h-8 md:hidden'></div>
+          <div className='h-8 md:hidden'></div>
 
-          {/* Доп. защита от горизонтального скролла на некоторых девайсах/темах */}
           <div
             className='sr-only'
             aria-hidden='true'
-          >
-            {/* keep */}
-          </div>
+          ></div>
         </div>
       </div>
     </div>

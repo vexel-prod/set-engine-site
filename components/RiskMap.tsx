@@ -1,20 +1,19 @@
 'use client'
 
-import { useMemo, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import {
   AlertTriangle,
-  ShieldAlert,
-  TrendingUp,
-  Search,
-  Tag,
-  User,
-  Route,
-  X,
-  ChevronRight,
   AppWindowMac,
+  ChevronRight,
+  Route,
+  Search,
+  ShieldAlert,
+  Tag,
+  TrendingUp,
+  User,
+  X,
 } from 'lucide-react'
-
+import { useMemo, useState } from 'react'
 
 type Severity = 'P1' | 'P2' | 'P3'
 type Likelihood = 1 | 2 | 3 | 4 | 5
@@ -463,7 +462,7 @@ export default function RiskMap() {
                   className={[
                     'rounded-2xl border px-3 py-2 text-sm font-mono transition',
                     sevFilter === k
-                      ? 'bg-white/80 dark:bg-black/30 border-zinc-300 dark:border-zinc-700 text-zinc-900 dark:text-zinc-100'
+                      ? 'bg-white/80 dark:bg-black/30 border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-zinc-100'
                       : 'bg-transparent border-zinc-200/70 dark:border-zinc-800 text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200',
                   ].join(' ')}
                 >
@@ -486,7 +485,7 @@ export default function RiskMap() {
                   className={[
                     'text-xs rounded-full border px-2 py-1 transition',
                     catFilter === 'ALL'
-                      ? 'border-zinc-300 dark:border-zinc-700 bg-white/80 dark:bg-black/30 text-zinc-900 dark:text-zinc-100'
+                      ? 'border-zinc-200 dark:border-zinc-800 bg-white/80 dark:bg-black/30 text-zinc-900 dark:text-zinc-100'
                       : 'border-zinc-200/70 dark:border-zinc-800 text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200',
                   ].join(' ')}
                 >
@@ -500,7 +499,7 @@ export default function RiskMap() {
                     className={[
                       'text-xs rounded-full border px-2 py-1 transition',
                       catFilter === c
-                        ? 'border-zinc-300 dark:border-zinc-700 bg-white/80 dark:bg-black/30 text-zinc-900 dark:text-zinc-100'
+                        ? 'border-zinc-200 dark:border-zinc-800 bg-white/80 dark:bg-black/30 text-zinc-900 dark:text-zinc-100'
                         : 'border-zinc-200/70 dark:border-zinc-800 text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200',
                     ].join(' ')}
                   >
@@ -521,7 +520,7 @@ export default function RiskMap() {
                   className={[
                     'text-xs rounded-full border px-2 py-1 transition',
                     stageFilter === 'ALL'
-                      ? 'border-zinc-300 dark:border-zinc-700 bg-white/80 dark:bg-black/30 text-zinc-900 dark:text-zinc-100'
+                      ? 'border-zinc-200 dark:border-zinc-800 bg-white/80 dark:bg-black/30 text-zinc-900 dark:text-zinc-100'
                       : 'border-zinc-200/70 dark:border-zinc-800 text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200',
                   ].join(' ')}
                 >
@@ -535,7 +534,7 @@ export default function RiskMap() {
                     className={[
                       'text-xs rounded-full border px-2 py-1 transition',
                       stageFilter === s
-                        ? 'border-zinc-300 dark:border-zinc-700 bg-white/80 dark:bg-black/30 text-zinc-900 dark:text-zinc-100'
+                        ? 'border-zinc-200 dark:border-zinc-800 bg-white/80 dark:bg-black/30 text-zinc-900 dark:text-zinc-100'
                         : 'border-zinc-200/70 dark:border-zinc-800 text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200',
                     ].join(' ')}
                   >
@@ -600,7 +599,7 @@ export default function RiskMap() {
                         'w-full text-left rounded-2xl border px-3 py-3 md:px-4 md:py-3 transition',
                         selectedId === r.id
                           ? 'border-brand-500 dark:border-brand-600 bg-white/90 dark:bg-black/30'
-                          : 'border-zinc-200/70 dark:border-zinc-800 bg-white/70 dark:bg-black/20 hover:border-zinc-300 dark:hover:border-zinc-700',
+                          : 'border-zinc-200/70 dark:border-zinc-800 bg-white/70 dark:bg-black/20 hover:border-zinc-200 dark:hover:border-zinc-800',
                       ].join(' ')}
                     >
                       <div className='flex items-start justify-between gap-3'>

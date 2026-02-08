@@ -1,21 +1,21 @@
 'use client'
 
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { motion, AnimatePresence } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import type { LucideIcon } from 'lucide-react'
 import {
-  Home,
-  Briefcase,
-  Zap,
   Activity,
-  Calculator,
-  ShieldAlert,
+  Briefcase,
   Building2,
+  Calculator,
+  FolderSearch,
+  Home,
   Phone,
   Search,
-  FolderSearch,
+  ShieldAlert,
+  Zap,
 } from 'lucide-react'
+import { useRouter } from 'next/navigation'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useAppContext } from './AppContext'
 
 type CommandItem = {
@@ -204,7 +204,7 @@ export default function CommandPalette() {
                 <button
                   onClick={close}
                   type='button'
-                  className='text-[10px] font-mono text-zinc-400 border border-zinc-200 dark:border-zinc-800 px-2.5 py-1.5 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors uppercase tracking-widest'
+                  className='text-[10px] font-mono text-zinc-400 border border-zinc-200 dark:border-zinc-800 px-2.5 py-1.5 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors uppercase tracking-widest shadow-lg shadow-base-300/20'
                 >
                   ESC
                 </button>
@@ -225,7 +225,7 @@ export default function CommandPalette() {
                         type='button'
                         onClick={() => navigate(cmd.path)}
                         onMouseEnter={() => setSelectedIndex(idx)}
-                        className={`cursor-pointer w-full flex items-center justify-between p-4 rounded-[20px] transition-all group ${
+                        className={`cursor-pointer w-full flex items-center justify-between p-4 rounded-[20px] transition-all group shadow-lg shadow-base-300/20 ${
                           active
                             ? 'bg-brand-500 text-white shadow-lg shadow-brand-500/20'
                             : 'hover:bg-zinc-50 dark:hover:bg-zinc-800 text-zinc-600 dark:text-zinc-300'
@@ -259,9 +259,7 @@ export default function CommandPalette() {
                         {active && (
                           <div className='flex items-center gap-2'>
                             <span className='flex items-center gap-2'>
-                              <kbd className='border border-zinc-300 dark:border-zinc-700 px-1.5 py-0.5 rounded shadow-sm font-sans'>
-                                ↵
-                              </kbd>
+                              <kbd className=' px-1.5 py-0.5 rounded shadow-sm font-sans'>↵</kbd>
                               SELECT
                             </span>
                           </div>
@@ -295,13 +293,13 @@ export default function CommandPalette() {
             <div className='p-4 bg-zinc-50/50 dark:bg-black/20 border-t border-zinc-100 dark:border-zinc-800 flex justify-between items-center px-6'>
               <div className='flex gap-5 text-[9px] font-mono text-zinc-500 uppercase'>
                 <span className='flex items-center gap-2'>
-                  <kbd className='border border-zinc-300 dark:border-zinc-700 px-1.5 py-0.5 rounded shadow-sm bg-white dark:bg-zinc-900 font-sans'>
+                  <kbd className='border border-zinc-200 dark:border-zinc-800 px-1.5 py-0.5 rounded shadow-sm bg-white dark:bg-zinc-900 font-sans'>
                     ↑↓
                   </kbd>
                   Навигация
                 </span>
                 <span className='flex items-center gap-2'>
-                  <kbd className='border border-zinc-300 dark:border-zinc-700 px-1.5 py-0.5 rounded shadow-sm bg-white dark:bg-zinc-900 font-sans'>
+                  <kbd className='border border-zinc-200 dark:border-zinc-800 px-1.5 py-0.5 rounded shadow-sm bg-white dark:bg-zinc-900 font-sans'>
                     ↵
                   </kbd>
                   Открыть

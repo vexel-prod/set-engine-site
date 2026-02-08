@@ -106,7 +106,7 @@ export default function ApproachContent() {
         </div>
       </section>
 
-      <div className='p-12 bg-black rounded-[40px] text-center space-y-6'>
+      <div className='p-12 bg-black rounded-3xl text-center space-y-6'>
         <h3 className='text-2xl font-display font-bold text-white uppercase italic'>
           «Прозрачность — это новый стандарт инжиниринга»
         </h3>

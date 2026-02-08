@@ -1,10 +1,10 @@
 'use client'
 
-import React, { useMemo, useState, useEffect } from 'react'
-import Link from 'next/link'
+import { Menu, Moon, Search, Sun, X } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Search, Menu, X, Sun, Moon } from 'lucide-react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useAppContext } from './AppContext'
 
 function GuardedLink({
@@ -95,7 +95,9 @@ export default function Header() {
   return (
     <header
       className={`sticky top-0 z-100 border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 backdrop-blur-2xl transition-all' ${
-        scrolled ? 'dark:bg-zinc-950/50 transition-all duration-150 border-none shadow-lg shadow-base-300/20' : ''
+        scrolled
+          ? 'dark:bg-zinc-950/50 transition-all duration-150 border-none shadow-lg shadow-base-300/20'
+          : ''
       }`}
     >
       <div className='container mx-auto px-4 h-20 flex items-center justify-between'>
@@ -144,7 +146,7 @@ export default function Header() {
           >
             <Search size={16} />
             <span className='text-xs text-zinc-500'>Поиск</span>
-            <span className='ml-2 text-[10px] text-zinc-400 border border-zinc-200 dark:border-zinc-700 rounded-md px-1.5 py-0.5'>
+            <span className='ml-2 text-[10px] text-zinc-400 border border-zinc-200 dark:border-zinc-800 rounded-md px-1.5 py-0.5'>
               ⌘K
             </span>
           </button>

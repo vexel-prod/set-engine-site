@@ -1,12 +1,12 @@
 'use client'
 
-import { Suspense, useCallback, useMemo, useRef, useState } from 'react'
-import { motion, AnimatePresence, useReducedMotion, type Transition } from 'framer-motion'
-import { Box, BarChart3, ShieldAlert, Terminal, Zap, HardDrive, SquareTerminal } from 'lucide-react'
+import { AnimatePresence, motion, useReducedMotion, type Transition } from 'framer-motion'
+import { BarChart3, Box, HardDrive, ShieldAlert, SquareTerminal, Terminal, Zap } from 'lucide-react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import Simulator from '../Simulator'
+import { Suspense, useCallback, useMemo, useRef, useState } from 'react'
 import Calculator from '../Calculator'
 import RiskMap from '../RiskMap'
+import Simulator from '../Simulator'
 
 type ToolId = 'simulator' | 'calculator' | 'riskmap'
 
@@ -64,10 +64,8 @@ function InteractivesContentInner() {
 
   const [activeThread] = useState<string>('----')
 
-  // Источник правды для текущего модуля — URL
   const activeTool = urlTool
 
-  // Локальный state только для "инициализации" при кликах на самой странице
   const [isInitializing, setIsInitializing] = useState(false)
   const [pendingTool, setPendingTool] = useState<ToolId>(activeTool)
 
@@ -88,7 +86,6 @@ function InteractivesContentInner() {
       setPendingTool(toolId)
       setIsInitializing(true)
 
-      // Меняем URL сразу — контент будет "готов" после 600мс, когда выключим loader
       router.push(`/interactives?tool=${toolId}`)
 
       initTimerRef.current = window.setTimeout(() => {
@@ -99,17 +96,12 @@ function InteractivesContentInner() {
     [activeTool, clearInitTimer, router],
   )
 
-  // очистка таймера при размонтировании
-  // (без useEffect: чтобы не ловить ваш линт set-state-in-effect, просто чистим в goToTool,
-  // а таймер сам перестанет быть актуален при переходе/размонтаже)
-  // Если у вас есть правило require-cleanup-effect — скажи, добавлю cleanup, но без setState.
-
   const activeMeta = useMemo(() => tools.find((t) => t.id === activeTool)!, [activeTool])
 
   return (
     <>
       {/* Simulation Hub Header */}
-      <section className='relative overflow-hidden rounded-[40px] bg-zinc-50 p-6 md:p-12 text-left dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800'>
+      <section className='relative overflow-hidden rounded-3xl bg-zinc-50 p-6 md:p-12 text-left dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 shadow-lg shadow-base-300/20'>
         <div className='absolute top-0 right-0 opacity-10'>
           <SquareTerminal
             size={267}
@@ -162,10 +154,10 @@ function InteractivesContentInner() {
                     key={tool.id}
                     type='button'
                     onClick={() => goToTool(tool.id)}
-                    className={`cursor-pointer relative group flex flex-col items-start p-6 rounded-3xl border transition-all duration-300 text-left overflow-hidden ${
+                    className={`cursor-pointer relative group flex flex-col items-start p-6 rounded-3xl border transition-all duration-300 text-left overflow-hidden shadow-lg shadow-base-300/20 ${
                       isActive
                         ? 'bg-brand-500 border-brand-500 text-white shadow-xl shadow-brand-500/20'
-                        : 'bg-white dark:bg-zinc-950 border-zinc-200 dark:border-zinc-900 text-zinc-600 dark:text-zinc-400 hover:border-zinc-400 dark:hover:border-zinc-700'
+                        : 'bg-white dark:bg-zinc-950 border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 hover:border-zinc-400 dark:hover:border-zinc-800'
                     }`}
                   >
                     <div className='flex justify-between w-full mb-4'>
@@ -226,7 +218,7 @@ function InteractivesContentInner() {
 
           {/* Main Simulation Display */}
           <div className='lg:col-span-3'>
-            <div className='relative h-full rounded-[48px] bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 overflow-hidden min-h-150 shadow-inner flex flex-col'>
+            <div className='relative h-full rounded-3xl bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 overflow-hidden min-h-150 flex flex-col shadow-lg shadow-base-300/20'>
               {/* Bezel UI */}
               <div className='absolute top-0 left-0 right-0 h-10 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between px-8 bg-zinc-100/50 dark:bg-zinc-900/50'>
                 <div className='flex gap-4 items-center'>

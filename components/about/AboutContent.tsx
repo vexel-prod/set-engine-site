@@ -1,22 +1,22 @@
 'use client'
 
 import { motion, useReducedMotion, type Transition } from 'framer-motion'
-import Image from 'next/image'
 import {
-  Shield,
-  Target,
-  Zap,
+  Activity,
+  Award,
   Cog,
   Cpu,
-  Users,
-  Award,
   Database,
-  Activity,
   Globe,
   Layers,
+  Shield,
+  Target,
+  Users,
+  Zap,
 } from 'lucide-react'
-import { companyData } from '../../data/company'
+import Image from 'next/image'
 import { useMemo } from 'react'
+import { companyData } from '../../data/company'
 
 type StatItem = {
   label: string
@@ -81,7 +81,7 @@ export default function AboutContent() {
     <>
       {/* HERO / HEADER */}
       <section
-        className='relative overflow-hidden rounded-[40px]
+        className='relative overflow-hidden rounded-3xl
         bg-zinc-50 dark:bg-zinc-950
         border border-zinc-200 dark:border-zinc-800
         shadow-lg shadow-base-300/20
@@ -152,7 +152,7 @@ export default function AboutContent() {
 
       {/* IMAGE / AR BLOCK */}
       <section
-        className='relative overflow-hidden group rounded-[40px]
+        className='relative overflow-hidden group rounded-3xl
           bg-zinc-50 dark:bg-zinc-950
           border border-zinc-200 dark:border-zinc-800
           shadow-lg shadow-base-300/20
@@ -259,7 +259,7 @@ export default function AboutContent() {
             <motion.div
               key={i}
               whileHover={reduceMotion ? undefined : { y: -8 }}
-              className='p-7 sm:p-8 md:p-10 rounded-[40px]
+              className='p-7 sm:p-8 md:p-10 rounded-3xl
                 bg-zinc-50 dark:bg-zinc-950
                 border border-zinc-200 dark:border-zinc-800
                 shadow-lg shadow-base-300/20
@@ -312,7 +312,7 @@ export default function AboutContent() {
             </div>
 
             <div
-              className='p-6 md:p-8 rounded-[32px] md:rounded-[40px]
+              className='p-6 md:p-8 rounded-[32px] md:rounded-3xl
               bg-zinc-50 dark:bg-zinc-950
               border-2 border-dashed border-zinc-200 dark:border-zinc-800
               shadow-lg shadow-base-300/20
@@ -330,14 +330,11 @@ export default function AboutContent() {
             </div>
           </div>
 
-          <div className='lg:col-span-8 w-full overflow-hidden rounded-[40px] md:rounded-[60px] shadow-lg shadow-base-300/20 border border-zinc-200 dark:border-zinc-800'>
+          <div className='lg:col-span-8 w-full overflow-hidden rounded-3xl md:rounded-[60px] shadow-lg shadow-base-300/20 border border-zinc-200 dark:border-zinc-800'>
             <motion.div className='relative overflow-hidden bg-zinc-50 dark:bg-zinc-950 p-5 sm:p-6 md:p-10 lg:p-14'>
-
               <div className='absolute inset-0 pointer-events-none opacity-[0.06]'>
                 <div className='absolute -top-10 -right-10'>
-                  <Globe
-                    size={240}
-                  />
+                  <Globe size={240} />
                 </div>
               </div>
 

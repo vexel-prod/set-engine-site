@@ -55,7 +55,7 @@ export default function TermsContent() {
 
         <section className='space-y-6 text-left'>
           <h2 className='text-2xl font-display font-bold uppercase'>2. Согласие на обработку</h2>
-          <div className='p-10 border border-zinc-200 dark:border-zinc-800 rounded-[40px] space-y-6 text-zinc-500 text-sm leading-relaxed'>
+          <div className='p-10 border border-zinc-200 dark:border-zinc-800 rounded-3xl space-y-6 text-zinc-500 text-sm leading-relaxed'>
             <p>
               Нажимая кнопку «Отправить» или «Заказать аудит» на любом из разделов сайта, вы даете
               свое полное согласие ООО «СЭТ» (ИНН 7720946228) на автоматизированную обработку

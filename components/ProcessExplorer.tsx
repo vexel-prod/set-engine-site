@@ -1,7 +1,7 @@
 'use client'
 
-import { useState } from 'react'
 import { motion } from 'framer-motion'
+import { useState } from 'react'
 
 const steps = [
   {
@@ -211,7 +211,7 @@ export default function ProcessExplorer() {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: j * 0.08 }}
-                className='px-4 py-2 bg-zinc-100 dark:bg-zinc-800 rounded-xl text-xs font-medium text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700 shadow-sm'
+                className='px-4 py-2 bg-zinc-100 dark:bg-zinc-800 rounded-xl text-xs font-medium text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-800 shadow-sm'
               >
                 {art}
               </motion.span>

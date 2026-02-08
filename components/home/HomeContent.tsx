@@ -1,12 +1,12 @@
 'use client'
 
 import { motion, useReducedMotion, type Transition } from 'framer-motion'
-import { useMemo } from 'react'
+import { House } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useMemo } from 'react'
 import ProcessExplorer from '../ProcessExplorer'
 import TypingText from '../TypingText'
-import { House } from 'lucide-react'
 
 const fieldPhotos = [
   {
@@ -38,7 +38,7 @@ export default function HomeContent() {
   return (
     <>
       {/* Header section */}
-      <section className='relative overflow-hidden rounded-[40px] bg-zinc-50 dark:bg-zinc-950 p-6 md:p-12 text-left border border-zinc-200 dark:border-zinc-800 shadow-lg shadow-base-300/20'>
+      <section className='relative overflow-hidden rounded-3xl bg-zinc-50 dark:bg-zinc-950 p-6 md:p-12 text-left border border-zinc-200 dark:border-zinc-800 shadow-lg shadow-base-300/20'>
         <div className='absolute top-0 right-0 pt-2 opacity-10 pointer-events-none'>
           <House
             size={260}
@@ -79,7 +79,6 @@ export default function HomeContent() {
             сравнивайте варианты и принимайте решения на данных.
           </p>
         </div>
-        
       </section>
 
       {/* Content (images) section */}

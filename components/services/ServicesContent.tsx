@@ -8,7 +8,6 @@ import {
   type Transition,
 } from 'framer-motion'
 import {
-  ServerCog,
   Binary,
   Boxes,
   ClipboardCheck,
@@ -16,6 +15,7 @@ import {
   FileSearch,
   HardHat,
   Layers,
+  ServerCog,
   Settings,
   Zap,
 } from 'lucide-react'
@@ -208,7 +208,7 @@ export default function ServicesContent() {
   return (
     <>
       {/* Header Section */}
-      <section className='relative overflow-hidden rounded-[40px] bg-zinc-50 dark:bg-zinc-950 p-6 md:p-12 text-left border border-zinc-200 dark:border-zinc-800 shadow-lg shadow-base-300/20'>
+      <section className='relative overflow-hidden rounded-3xl bg-zinc-50 dark:bg-zinc-950 p-6 md:p-12 text-left border border-zinc-200 dark:border-zinc-800 shadow-lg shadow-base-300/20'>
         <div className='absolute top-0 right-0 p-3 opacity-10'>
           <ServerCog
             size={240}
@@ -263,7 +263,7 @@ export default function ServicesContent() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.2 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className={`bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 hover:border-brand-500 group relative flex flex-col rounded-[40px]  overflow-hidden ${
+                  className={`bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 hover:border-brand-500 group relative flex flex-col rounded-3xl  overflow-hidden ${
                     isExpanded ? 'lg:col-span-2 border-brand-500' : 'shadow-lg shadow-base-300/20'
                   }`}
                 >
@@ -364,7 +364,7 @@ export default function ServicesContent() {
                               </div>
                             </div>
                           </div>
-                          <div className='flex w-full mt-12 gap-2 items-center justify-center p-2 rounded-xl  border border-zinc-500/50'>
+                          <div className='flex w-full mt-12 gap-2 items-center justify-center p-2 rounded-xl  border border-zinc-200/50'>
                             <span className='text-xs font-mono text-brand-500 uppercase'>
                               Длительность модуля:
                             </span>
@@ -395,7 +395,7 @@ export default function ServicesContent() {
       </section>
 
       {/* Performance Footer Banner */}
-      <section className='relative overflow-hidden rounded-[40px] bg-zinc-50 dark:bg-zinc-950 p-12 text-left border border-zinc-200 dark:border-zinc-800 shadow-lg shadow-base-300/20'>
+      <section className='relative overflow-hidden rounded-3xl bg-zinc-50 dark:bg-zinc-950 p-12 text-left border border-zinc-200 dark:border-zinc-800 shadow-lg shadow-base-300/20'>
         <div className='absolute inset-0 opacity-10 tech-grid' />
         <div className='relative z-10 flex flex-col md:flex-row justify-between items-center gap-8 text-center md:text-left'>
           <div className='space-y-4'>

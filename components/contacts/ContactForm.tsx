@@ -1,9 +1,9 @@
 'use client'
 
-import React, { useEffect, useMemo, useState, type FormEvent } from 'react'
-import { AnimatePresence, motion, useReducedMotion, type Transition } from 'framer-motion'
-import { Mail, Phone, MessageSquare, Globe, Clock, ShieldCheck, Contact } from 'lucide-react'
 import { useClientValue } from '@/components/hooks/useClientValue'
+import { AnimatePresence, motion, useReducedMotion, type Transition } from 'framer-motion'
+import { Clock, Contact, Globe, Mail, MessageSquare, Phone, ShieldCheck } from 'lucide-react'
+import { useEffect, useMemo, useState, type FormEvent } from 'react'
 
 type Status = 'idle' | 'sending' | 'success'
 
@@ -73,7 +73,7 @@ export default function ContactForm() {
   return (
     <>
       {/* Hero Header Section */}
-      <section className='relative overflow-hidden rounded-[40px] bg-zinc-50 dark:bg-zinc-950 p-6 md:p-12 text-left border border-zinc-200 dark:border-zinc-800 shadow-lg shadow-base-300/20'>
+      <section className='relative overflow-hidden rounded-3xl bg-zinc-50 dark:bg-zinc-950 p-6 md:p-12 text-left border border-zinc-200 dark:border-zinc-800 shadow-lg shadow-base-300/20'>
         <div className='absolute top-0 right-0 p-3 opacity-10'>
           <Contact
             size={240}
@@ -119,7 +119,7 @@ export default function ContactForm() {
         {/* Left Column: Stats & Info */}
         <div className='space-y-6 lg:col-span-1'>
           {/* Status Panel */}
-          <div className='rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50 p-8 space-y-6'>
+          <div className='rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 p-8 space-y-6 shadow-lg shadow-base-300/20'>
             <h3 className='font-mono text-[10px] font-bold uppercase tracking-widest text-zinc-400 border-b border-zinc-200 dark:border-zinc-800 pb-4'>
               System_Status
             </h3>
@@ -170,7 +170,7 @@ export default function ContactForm() {
           <div className='grid grid-cols-2 gap-4'>
             <a
               href='mailto:info@set-energy.tech'
-              className='flex flex-col items-center justify-center p-6 rounded-3xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:border-brand-500 transition-colors group'
+              className='flex flex-col items-center justify-center p-6 rounded-3xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 hover:border-brand-500 transition-colors group shadow-lg shadow-base-300/20'
             >
               <Mail className='w-6 h-6 mb-3 text-zinc-400 group-hover:text-brand-500 transition-colors' />
               <span className='text-[10px] font-mono uppercase tracking-widest'>Email</span>
@@ -178,7 +178,7 @@ export default function ContactForm() {
 
             <a
               href='tel:+74950000000'
-              className='flex flex-col items-center justify-center p-6 rounded-3xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:border-brand-500 transition-colors group'
+              className='flex flex-col items-center justify-center p-6 rounded-3xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 hover:border-brand-500 transition-colors group shadow-lg shadow-base-300/20'
             >
               <Phone className='w-6 h-6 mb-3 text-zinc-400 group-hover:text-brand-500 transition-colors' />
               <span className='text-[10px] font-mono uppercase tracking-widest'>Call</span>
@@ -187,10 +187,10 @@ export default function ContactForm() {
 
           {/* Location Visual */}
           <div
-            className='bg-[url(/contacts.png)] bg-cover relative aspect-square rounded-[40px] border dark:border-zinc-800 border-zinc-200 overflow-hidden group'
+            className='bg-[url(/contacts.png)] bg-cover relative aspect-square rounded-3xl border border-zinc-200 dark:border-zinc-800 overflow-hidden group shadow-lg shadow-base-300/20'
             style={{ backgroundPositionX: '-111px' }}
           >
-            <div className='absolute inset-0 bg-black/60 backdrop-grayscale pointer-events-none' />
+            <div className='absolute inset-0 backdrop-grayscale-70 dark:backdrop-grayscale-100 pointer-events-none' />
             <div className='absolute inset-0 opacity-20 tech-grid' />
 
             <div className='absolute inset-0 flex items-center justify-center'>
@@ -216,7 +216,7 @@ export default function ContactForm() {
 
         {/* Right Column: Terminal Form */}
         <div className='lg:col-span-2'>
-          <div className='h-full rounded-[48px] bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 overflow-hidden flex flex-col'>
+          <div className='h-full rounded-3xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 overflow-hidden flex flex-col shadow-lg shadow-base-300/20'>
             {/* Terminal Header */}
             <div className='bg-zinc-100 dark:bg-zinc-900 px-8 py-4 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between'>
               <div className='flex gap-1.5'>
