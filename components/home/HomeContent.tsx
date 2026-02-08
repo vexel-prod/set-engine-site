@@ -1,6 +1,7 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion, type Transition } from 'framer-motion'
+import { useMemo } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import ProcessExplorer from '../ProcessExplorer'
@@ -28,49 +29,59 @@ const fieldPhotos = [
 ]
 
 export default function HomeContent() {
+  const reduceMotion = useReducedMotion()
+  const appearTransition: Transition = useMemo(
+    () => (reduceMotion ? { duration: 0 } : { duration: 0.22 }),
+    [reduceMotion],
+  )
   return (
     <>
       {/* Header section */}
-      <section className='grid place-content-center relative bg-zinc-50 dark:bg-zinc-950 overflow-hidden rounded-[40px] shadow-lg shadow-base-300/20 p-4 md:p-12 text-center border border-zinc-200 dark:border-zinc-800'>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className='max-w-5xl space-y-8'
-        >
-          <div className='inline-block rounded-full border border-brand-500/20 bg-brand-500/10 px-4 py-1.5'>
-            <span className='font-mono text-[10px] font-bold uppercase tracking-widest text-brand-500'>
-              ENGINEERING HUB v.1.0 — Active
-            </span>
+      <section className='relative overflow-hidden rounded-[40px] bg-zinc-50 dark:bg-zinc-950 p-6 md:p-12 text-left border border-zinc-200 dark:border-zinc-800 shadow-lg shadow-base-300/20'>
+        <div className='border-l-2 md:border-l-4 border-brand-500 pl-6 md:pl-12'>
+          <div className='flex items-center gap-3 font-mono text-[10px] font-bold uppercase tracking-[0.4em] text-brand-500'>
+            <span className='inline-block size-2 rounded-full bg-brand-500 animate-pulse' />
+            hero
           </div>
-          <h1>
-            Управление
-            <br />
-            <TypingText
-              phrases={['энергосетями', 'технологиями', 'строительством']}
-              className='text-brand-500 text-center font-mono'
-            />
-          </h1>
-          <p className='text-zinc-500'>
-            ООО «СЭТ» ИНН: 7720946228 Строительство и энергетические технологии Прозрачность
-            процессов в каждой точке данных.
-          </p>
 
-          <div className='flex flex-col items-center justify-center gap-4 pt-6 sm:flex-row'>
-            <Link
-              href='/interactives?tool=simulator'
-              className='rounded-2xl bg-brand-500 px-10 py-4 font-bold text-white shadow-xl shadow-brand-500/20 transition-all hover:bg-brand-600 active:scale-95'
+          <div className='flex flex-col md:flex-row md:items-end md:justify-between gap-6 md:gap-10'>
+            <motion.div
+              initial={reduceMotion ? false : { opacity: 0, x: -24 }}
+              animate={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.4 }}
+              transition={appearTransition}
             >
-              Запустить аудит
-            </Link>
-            <Link
-              href='/interactives?tool=calculator'
-              className='rounded-2xl bg-zinc-950 px-10 py-4 font-bold text-white transition-all hover:bg-zinc-800 active:scale-95 dark:bg-zinc-800 dark:hover:bg-zinc-700'
-            >
-              Калькулятор
-            </Link>
+              <h1>
+                управление <br />
+                <TypingText
+                  phrases={['строительством', 'энергетикой', 'технологиями']}
+                  speed={130}
+                  className='text-brand-500 tracking-wide uppercase font-mono text-left'
+                />
+              </h1>
+            </motion.div>
+
+            <div className='flex flex-col sm:flex-row gap-3 sm:gap-4 w-full md:w-auto'>
+              <Link
+                href='/interactives?tool=simulator'
+                className='rounded-2xl bg-brand-500 px-10 py-4 font-bold text-white shadow-xl shadow-brand-500/20 transition-all hover:bg-brand-600 active:scale-95 text-center w-full sm:w-auto'
+              >
+                Аудит
+              </Link>
+              <Link
+                href='/interactives?tool=calculator'
+                className='rounded-2xl bg-zinc-950 px-10 py-4 font-bold text-white transition-all hover:bg-zinc-800 active:scale-95 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-center w-full sm:w-auto'
+              >
+                Калькулятор
+              </Link>
+            </div>
           </div>
-        </motion.div>
+
+          <p className='text-xs md:text-xl text-zinc-500 max-w-2xl leading-relaxed border-t-4 border-dashed border-brand-500/50 w-full pt-4 mt-4 wrap-break-words whitespace-normal'>
+            Интерактивные инструменты для быстрого аудита и расчётов: моделируйте сценарии,
+            сравнивайте варианты и принимайте решения на данных.
+          </p>
+        </div>
       </section>
 
       {/* Content (images) section */}
@@ -79,7 +90,7 @@ export default function HomeContent() {
           {fieldPhotos.map((photo) => (
             <motion.div
               key={photo.id}
-              className='group relative aspect-4/5 overflow-hidden rounded-4xl'
+              className='border border-zinc-200 dark:border-zinc-800 shadow-lg shadow-base-300/20 group relative aspect-4/5 overflow-hidden rounded-4xl'
             >
               <div className='absolute top-4 left-4 z-20 flex flex-col gap-1'>
                 <span className='w-fit rounded border border-white/10 bg-black/60 px-2 py-1 font-mono text-[9px] text-white backdrop-blur-md'>
@@ -128,11 +139,10 @@ export default function HomeContent() {
           <Link
             key={i}
             href={box.href}
-            className='group flex h-full flex-col rounded-4xl border border-zinc-200 bg-zinc-50 p-8 transition-all duration-500 hover:border-brand-500 dark:border-zinc-800 dark:bg-zinc-900/50'
+            className='group flex h-full flex-col rounded-4xl border border-zinc-200 bg-zinc-50 p-4 md:p-8 transition-all duration-500 hover:border-brand-500 dark:border-zinc-800 dark:bg-zinc-950 shadow-lg shadow-base-300/20'
           >
             <h3
-              className='font-display mb-4 text-xl sm:text-2xl font-bold uppercase tracking-tighter transition-colors group-hover:text-brand-500 wrap-break-words hyphens-auto'
-              style={{ hyphens: 'auto' }}
+              className='mb-4 font-bold uppercase tracking-tighter transition-colors group-hover:text-brand-500'
             >
               {box.title}
             </h3>

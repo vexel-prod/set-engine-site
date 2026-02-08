@@ -215,7 +215,7 @@ export default function ServicesContent() {
             className='text-brand-500 hidden md:block'
           />
         </div>
-        <div className='border-l-2 md:border-l-4 border-brand-500 pl-2 md:pl-12'>
+        <div className='border-l-2 md:border-l-4 border-brand-500 pl-6 md:pl-12'>
           <div className='flex items-center gap-3 font-mono text-[10px] font-bold uppercase tracking-[0.4em] text-brand-500'>
             <ServerCog
               size={14}
@@ -228,14 +228,13 @@ export default function ServicesContent() {
             animate={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.4 }}
             transition={appearTransition}
-            className='space-y-4'
           >
             <h1>
               Наши <span className='text-brand-500'>Системные</span> <br />
               Модули
             </h1>
           </motion.div>
-          <p className='text-xs md:text-xl text-zinc-500 max-w-2xl leading-relaxed border-t-4 border-dashed border-brand-500/50 w-max pt-4 mt-4'>
+          <p className='text-xs md:text-xl text-zinc-500 max-w-2xl leading-relaxed border-t-4 border-dashed border-brand-500/50 w-full pt-4 mt-4 wrap-break-words whitespace-normal'>
             Мы предлагаем дискретные и комплексные инженерные решения, оцифрованные по стандарту
             СЭТ. Каждый модуль гарантирует консистентность данных на протяжении всего жизненного
             цикла объекта.

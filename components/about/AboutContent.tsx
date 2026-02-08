@@ -56,10 +56,10 @@ export default function AboutContent() {
   return (
     <>
       {/* Header Section */}
-      <section className='relative overflow-hidden rounded-[40px] dark:bg-zinc-950 p-12 text-left border border-zinc-200 dark:border-zinc-900'>
-        <div className='absolute top-0 right-0 p-8 opacity-10'>
+      <section className='relative overflow-hidden rounded-[40px] bg-zinc-50 p-6 md:p-12 text-left dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800'>
+        <div className='absolute top-0 right-0 p-3 opacity-10'>
           <Cog
-            size={240}
+            size={267}
             className='text-brand-500'
           />
         </div>
@@ -69,7 +69,7 @@ export default function AboutContent() {
               size={14}
               className='animate-pulse'
             />
-            Entity_Identity_Verified
+            Entity_Identity
           </div>
           <motion.div
             initial={reduceMotion ? false : { opacity: 0, x: -24 }}
@@ -80,11 +80,11 @@ export default function AboutContent() {
           >
             <h1>
               Инжиниринг <br />
-              <span className='text-zinc-300 dark:text-zinc-800'>Полного</span> <br />
+              <span className='text-brand-500'>Полного</span> <br />
               Цикла
             </h1>
           </motion.div>
-          <p>
+          <p className='text-xs md:text-xl text-zinc-500 max-w-2xl leading-relaxed border-t-4 border-dashed border-brand-500/50 w-max pt-4 mt-4'>
             СЭТ (Строительство и Энергетические Технологии) — это не просто компания, это
             операционная система для вашего строительного проекта. Мы оцифровываем физический мир,
             превращая хаос стройки в структурированный поток данных.
@@ -92,11 +92,11 @@ export default function AboutContent() {
         </div>
       </section>
 
-      <section className='flex gap-2'>
+      <section className='flex items-center justify-around'>
         {stats.map((s, i) => (
           <div
             key={i}
-            className='flex gap-4 items-center justify-center p-6 rounded-3xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800'
+            className='flex gap-4 items-center justify-center p-6 rounded-3xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800'
           >
             <s.icon className='w-8 h-8 text-brand-500' />
             <div className='text-2xl font-display font-bold text-nowrap'>{s.value}</div>

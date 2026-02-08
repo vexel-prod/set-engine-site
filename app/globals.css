@@ -37,7 +37,7 @@
   }
 
   h1 {
-    @apply uppercase m-0 text-zinc-500 text-4xl md:text-6xl leading-none font-bold;
+    @apply uppercase m-0 text-zinc-500 text-2xl md:text-6xl leading-none font-bold;
   }
 
   h2 {

@@ -1,14 +1,15 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 
 type Phase = 'typing' | 'pause' | 'fade'
 
 export default function TypingText({
   phrases,
-  speed = 80,
-  pauseMs = 2000,
-  fadeMs = 300,
+  // базовая “человеческая” скорость (с джиттером и паузами на знаках)
+  speed = 55,
+  pauseMs = 1800,
+  fadeMs = 250,
   className = '',
 }: {
   phrases: string[]
@@ -28,29 +29,39 @@ export default function TypingText({
 
   const current = list[idx] ?? ''
   const typed = current.slice(0, pos)
-
-  // derived: видимость зависит только от фазы (убираем visible state => нет setState в effect)
   const visible = phase !== 'fade'
 
-  // Резерв ширины под самый длинный текст для предотвращения Layout Shift
-  const maxCh = useMemo(() => {
-    const m = list.reduce((acc, s) => Math.max(acc, (s || '').length), 1)
-    return Math.max(5, m)
-  }, [list])
+  // чтобы джиттер был стабильнее между рендерами
+  const rngRef = useRef(Math.random)
+
+  const nextDelayMs = (nextChar: string) => {
+    // джиттер как у реального набора
+    const jitter = (rngRef.current() * 0.7 - 0.35) * speed // примерно ±35%
+    let d = Math.max(18, Math.round(speed + jitter))
+
+    // микропаузЫ на знаках препинания
+    if (/[,.!?;:]/.test(nextChar)) d += 140 + Math.round(rngRef.current() * 220)
+    if (nextChar === ' ') d += 10 + Math.round(rngRef.current() * 25)
+
+    // редкие “задумался”
+    if (rngRef.current() < 0.03) d += 120 + Math.round(rngRef.current() * 260)
+
+    return d
+  }
 
   useEffect(() => {
     let t: number | undefined
 
     if (phase === 'typing') {
       if (pos < current.length) {
-        t = window.setTimeout(() => setPos((p) => p + 1), speed)
+        const nextChar = current[pos] ?? ''
+        t = window.setTimeout(() => setPos((p) => p + 1), nextDelayMs(nextChar))
       } else {
-        // переход в pause — это смена "режима", а не derived state
         t = window.setTimeout(() => setPhase('pause'), 0)
       }
     } else if (phase === 'pause') {
       t = window.setTimeout(() => setPhase('fade'), pauseMs)
-    } else if (phase === 'fade') {
+    } else {
       t = window.setTimeout(() => {
         setIdx((v) => (v + 1) % list.length)
         setPos(0)
@@ -64,20 +75,23 @@ export default function TypingText({
   }, [phase, pos, current, speed, pauseMs, fadeMs, list.length])
 
   return (
-    <span
-      className={['inline-flex justify-center', className].join(' ')}
-      style={{ minWidth: `${maxCh}ch`, letterSpacing: '1px' }}
-    >
+    <span className={['inline-flex items-baseline', className].join(' ')}>
       <span
         className='transition-opacity duration-300'
         style={{
           opacity: visible ? 1 : 0,
           whiteSpace: 'nowrap',
+          letterSpacing: '1px',
         }}
       >
         {typed}
       </span>
-      <span className='ml-1.5 inline-block w-[0.04em] bg-current animate-terminal-blink' />
+
+      {/* курсор как был, но с гарантированной высотой, чтобы не “пропадал” */}
+      <span
+        className='ml-1.5 inline-block w-[0.04em] bg-current animate-terminal-blink'
+        style={{ height: '1em', transform: 'translateY(0.05em)' }}
+      />
     </span>
   )
 }

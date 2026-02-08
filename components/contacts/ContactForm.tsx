@@ -73,37 +73,39 @@ export default function ContactForm() {
   return (
     <>
       {/* Hero Header Section */}
-      <section className='relative overflow-hidden rounded-[40px] dark:bg-zinc-950 p-12 text-left border border-zinc-200 dark:border-zinc-900'>
-        <div className='absolute top-0 right-0 p-8 opacity-10'>
+      <section className='relative overflow-hidden rounded-[40px] bg-zinc-50 dark:bg-zinc-950 p-6 md:p-12 text-left border border-zinc-200 dark:border-zinc-800 shadow-lg shadow-base-300/20'>
+        <div className='absolute top-0 right-0 p-3 opacity-10'>
           <Contact
             size={240}
-            className='text-brand-500'
+            className='text-brand-500 hidden md:block'
           />
         </div>
 
-        <div className='border-l-4 border-brand-500 pl-8 md:pl-12'>
+        <div className='border-l-2 md:border-l-4 border-brand-500 pl-6 md:pl-12'>
           <div className='flex items-center gap-3 font-mono text-[10px] font-bold uppercase tracking-[0.4em] text-brand-500'>
             <Contact
               size={14}
               className='animate-pulse'
             />
-            Communication Node: Active
+            Communication_mode: Active
           </div>
 
-          <motion.div
-            initial={reduceMotion ? false : { opacity: 0, x: -24 }}
-            animate={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.4 }}
-            transition={appearTransition}
-            className='space-y-4'
-          >
-            <h1>
-              обратная связь с <br />{' '}
-              <span className='text-zinc-300 dark:text-zinc-800'>Центром</span>
-            </h1>
-          </motion.div>
+          <div className='flex flex-col md:flex-row md:items-end md:justify-between gap-6 md:gap-10'>
+            <motion.div
+              initial={reduceMotion ? false : { opacity: 0, x: -24 }}
+              animate={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.4 }}
+              transition={appearTransition}
+              className='space-y-4'
+            >
+              <h1>
+                обратная связь с <br />
+                <span className='text-brand-500'>Центром</span>
+              </h1>
+            </motion.div>
+          </div>
 
-          <p>
+          <p className='text-xs md:text-xl text-zinc-500 max-w-2xl leading-relaxed border-t-4 border-dashed border-brand-500/50 w-full pt-4 mt-4 wrap-break-words whitespace-normal'>
             Инициируйте сессию взаимодействия для аудита вашего объекта или получения технической
             консультации.
           </p>

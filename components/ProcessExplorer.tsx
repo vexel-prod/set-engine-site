@@ -54,11 +54,11 @@ function TechnicalButton({
       type='button'
       onClick={onSelect}
       className={[
-        'relative shrink-0 snap-center rounded-2xl border transition-all text-left overflow-hidden',
-        'w-[80vw] sm:w-80 px-6 py-5',
+        'cursor-pointer relative shrink-0 snap-center rounded-2xl border border-zinc-200 dark:border-zinc-800 transition-all text-left overflow-hidden',
+        'w-[80vw] sm:w-80 px-6 py-5 shadow-lg shadow-base-300/20',
         active
-          ? 'bg-brand-500 border-brand-500 text-white shadow-lg shadow-brand-500/20 scale-[1.02]'
-          : 'bg-zinc-50 dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 text-zinc-500 hover:border-zinc-400 dark:hover:border-zinc-700',
+          ? 'bg-brand-500 border-brand-500 text-white scale-[1.02]'
+          : 'bg-zinc-50 dark:bg-zinc-950 border-zinc-200 dark:border-zinc-800 text-zinc-500 dark:hover:border-brand-500',
       ].join(' ')}
       aria-pressed={active}
     >

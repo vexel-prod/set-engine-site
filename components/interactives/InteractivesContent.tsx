@@ -135,7 +135,7 @@ function InteractivesContentInner() {
               эмулятор <br /> <span className='text-brand-500'>процессов</span>
             </h1>
           </motion.div>
-          <p className='text-xs md:text-xl text-zinc-500 max-w-2xl leading-relaxed'>
+          <p className='text-xs md:text-xl text-zinc-500 max-w-2xl leading-relaxed border-t-4 border-dashed border-brand-500/50 w-full pt-4 mt-4 wrap-break-words whitespace-normal'>
             Развертывание виртуальных сценариев управления. Выберите модуль для проведения
             технического или финансового анализа.
           </p>
