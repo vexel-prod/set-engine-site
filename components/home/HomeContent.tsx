@@ -6,6 +6,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import ProcessExplorer from '../ProcessExplorer'
 import TypingText from '../TypingText'
+import { House } from 'lucide-react'
 
 const fieldPhotos = [
   {
@@ -38,12 +39,20 @@ export default function HomeContent() {
     <>
       {/* Header section */}
       <section className='relative overflow-hidden rounded-[40px] bg-zinc-50 dark:bg-zinc-950 p-6 md:p-12 text-left border border-zinc-200 dark:border-zinc-800 shadow-lg shadow-base-300/20'>
+        <div className='absolute top-0 right-0 pt-2 opacity-10 pointer-events-none'>
+          <House
+            size={260}
+            className='text-brand-500'
+          />
+        </div>
         <div className='border-l-2 md:border-l-4 border-brand-500 pl-6 md:pl-12'>
           <div className='flex items-center gap-3 font-mono text-[10px] font-bold uppercase tracking-[0.4em] text-brand-500'>
-            <span className='inline-block size-2 rounded-full bg-brand-500 animate-pulse' />
-            hero
+            <House
+              size={14}
+              className='animate-pulse'
+            />
+            home
           </div>
-
           <div className='flex flex-col md:flex-row md:items-end md:justify-between gap-6 md:gap-10'>
             <motion.div
               initial={reduceMotion ? false : { opacity: 0, x: -24 }}
@@ -51,7 +60,10 @@ export default function HomeContent() {
               viewport={{ once: true, amount: 0.4 }}
               transition={appearTransition}
             >
-              <h1>
+              <h1
+                className='font-display font-bold uppercase tracking-tighter leading-[0.95]
+              text-3xl sm:text-5xl md:text-6xl'
+              >
                 управление <br />
                 <TypingText
                   phrases={['строительством', 'энергетикой', 'технологиями']}
@@ -60,28 +72,14 @@ export default function HomeContent() {
                 />
               </h1>
             </motion.div>
-
-            <div className='flex flex-col sm:flex-row gap-3 sm:gap-4 w-full md:w-auto'>
-              <Link
-                href='/interactives?tool=simulator'
-                className='rounded-2xl bg-brand-500 px-10 py-4 font-bold text-white shadow-xl shadow-brand-500/20 transition-all hover:bg-brand-600 active:scale-95 text-center w-full sm:w-auto'
-              >
-                Аудит
-              </Link>
-              <Link
-                href='/interactives?tool=calculator'
-                className='rounded-2xl bg-zinc-950 px-10 py-4 font-bold text-white transition-all hover:bg-zinc-800 active:scale-95 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-center w-full sm:w-auto'
-              >
-                Калькулятор
-              </Link>
-            </div>
           </div>
 
-          <p className='text-xs md:text-xl text-zinc-500 max-w-2xl leading-relaxed border-t-4 border-dashed border-brand-500/50 w-full pt-4 mt-4 wrap-break-words whitespace-normal'>
+          <p className='mt-2 text-xs md:text-xl text-zinc-500 max-w-2xl leading-relaxed w-full wrap-break-words whitespace-normal'>
             Интерактивные инструменты для быстрого аудита и расчётов: моделируйте сценарии,
             сравнивайте варианты и принимайте решения на данных.
           </p>
         </div>
+        
       </section>
 
       {/* Content (images) section */}
@@ -141,9 +139,7 @@ export default function HomeContent() {
             href={box.href}
             className='group flex h-full flex-col rounded-4xl border border-zinc-200 bg-zinc-50 p-4 md:p-8 transition-all duration-500 hover:border-brand-500 dark:border-zinc-800 dark:bg-zinc-950 shadow-lg shadow-base-300/20'
           >
-            <h3
-              className='mb-4 font-bold uppercase tracking-tighter transition-colors group-hover:text-brand-500'
-            >
+            <h3 className='mb-4 font-bold uppercase tracking-tighter transition-colors group-hover:text-brand-500'>
               {box.title}
             </h3>
             <p className='text-sm leading-relaxed text-zinc-500 dark:text-zinc-400'>{box.desc}</p>

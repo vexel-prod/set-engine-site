@@ -77,7 +77,7 @@ export default function ContactForm() {
         <div className='absolute top-0 right-0 p-3 opacity-10'>
           <Contact
             size={240}
-            className='text-brand-500 hidden md:block'
+            className='text-brand-500'
           />
         </div>
 
@@ -98,14 +98,17 @@ export default function ContactForm() {
               transition={appearTransition}
               className='space-y-4'
             >
-              <h1>
+              <h1
+                className='font-display font-bold uppercase tracking-tighter leading-[0.95]
+              text-4xl sm:text-5xl md:text-6xl'
+              >
                 обратная связь с <br />
                 <span className='text-brand-500'>Центром</span>
               </h1>
             </motion.div>
           </div>
 
-          <p className='text-xs md:text-xl text-zinc-500 max-w-2xl leading-relaxed border-t-4 border-dashed border-brand-500/50 w-full pt-4 mt-4 wrap-break-words whitespace-normal'>
+          <p className='text-xs md:text-xl text-zinc-500 max-w-2xl leading-relaxed w-full pt-4 mt-4 wrap-break-words whitespace-normal'>
             Инициируйте сессию взаимодействия для аудита вашего объекта или получения технической
             консультации.
           </p>

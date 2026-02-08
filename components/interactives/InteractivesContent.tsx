@@ -113,7 +113,7 @@ function InteractivesContentInner() {
         <div className='absolute top-0 right-0 opacity-10'>
           <SquareTerminal
             size={267}
-            className='text-brand-500 hidden md:block'
+            className='text-brand-500'
           />
         </div>
         <div className='border-l-2 md:border-l-4 border-brand-500 pl-2 md:pl-12'>
@@ -131,11 +131,14 @@ function InteractivesContentInner() {
             transition={appearTransition}
             className='space-y-4'
           >
-            <h1>
+            <h1
+              className='font-display font-bold uppercase tracking-tighter leading-[0.95]
+              text-3xl sm:text-5xl md:text-6xl'
+            >
               эмулятор <br /> <span className='text-brand-500'>процессов</span>
             </h1>
           </motion.div>
-          <p className='text-xs md:text-xl text-zinc-500 max-w-2xl leading-relaxed border-t-4 border-dashed border-brand-500/50 w-full pt-4 mt-4 wrap-break-words whitespace-normal'>
+          <p className='text-xs md:text-xl text-zinc-500 max-w-2xl leading-relaxed w-full mt-2 wrap-break-words whitespace-normal'>
             Развертывание виртуальных сценариев управления. Выберите модуль для проведения
             технического или финансового анализа.
           </p>

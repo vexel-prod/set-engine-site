@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState, useCallback } from 'react'
 
 type Phase = 'typing' | 'pause' | 'fade'
 
@@ -34,20 +34,23 @@ export default function TypingText({
   // чтобы джиттер был стабильнее между рендерами
   const rngRef = useRef(Math.random)
 
-  const nextDelayMs = (nextChar: string) => {
-    // джиттер как у реального набора
-    const jitter = (rngRef.current() * 0.7 - 0.35) * speed // примерно ±35%
-    let d = Math.max(18, Math.round(speed + jitter))
+  const nextDelayMs = useCallback(
+    (nextChar: string) => {
+      // джиттер как у реального набора
+      const jitter = (rngRef.current() * 0.7 - 0.35) * speed // примерно ±35%
+      let d = Math.max(18, Math.round(speed + jitter))
 
-    // микропаузЫ на знаках препинания
-    if (/[,.!?;:]/.test(nextChar)) d += 140 + Math.round(rngRef.current() * 220)
-    if (nextChar === ' ') d += 10 + Math.round(rngRef.current() * 25)
+      // микропаузЫ на знаках препинания
+      if (/[,.!?;:]/.test(nextChar)) d += 140 + Math.round(rngRef.current() * 220)
+      if (nextChar === ' ') d += 10 + Math.round(rngRef.current() * 25)
 
-    // редкие “задумался”
-    if (rngRef.current() < 0.03) d += 120 + Math.round(rngRef.current() * 260)
+      // редкие “задумался”
+      if (rngRef.current() < 0.03) d += 120 + Math.round(rngRef.current() * 260)
 
-    return d
-  }
+      return d
+    },
+    [speed],
+  )
 
   useEffect(() => {
     let t: number | undefined
@@ -72,7 +75,7 @@ export default function TypingText({
     return () => {
       if (t) window.clearTimeout(t)
     }
-  }, [phase, pos, current, speed, pauseMs, fadeMs, list.length])
+  }, [phase, pos, current, pauseMs, fadeMs, list.length, nextDelayMs])
 
   return (
     <span className={['inline-flex items-baseline', className].join(' ')}>
