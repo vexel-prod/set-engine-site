@@ -185,7 +185,7 @@ export default function Header() {
         scrolled && 'shadow-lg shadow-base-300/10',
       )}
     >
-      <div className='container mx-auto px-4 h-20 flex items-center justify-between'>
+      <div className='container mx-auto px-6 h-20 flex items-center justify-between'>
         <GuardedLink
           href='/'
           className='flex items-center gap-3 group'
